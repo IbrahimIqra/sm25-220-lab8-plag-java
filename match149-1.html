@@ -1,0 +1,216 @@
+<html>
+<head>
+<title>A8_Sec17_24101362_Mst.Arpita-Rahman-Riana.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec02_23201103_LAMIA-MEHRIN.txt<p></p><pre>
+A8_sec-02_23201103_Lamia_Mehrin.txt
+
+Assignment 01
+public class MinHeap{
+
+    static int[] heap;
+    static int size;
+    public static void Heap(int cap){
+        heap=new int[cap];
+        size = 0;
+    }
+    public static void insert(int value){
+        if(size&gt;=heap.length){
+            return;
+        }
+        heap[size]=value;
+        heap_Up(size);
+        size++;
+    }
+// value swap kori jate heap property maintain kora jai
+    public static void swap(int x,int j){
+        int temp = heap[x];
+        heap[x] = heap[j];
+        heap[j] = temp;
+    }
+    // shobche choto value ta diye return dae
+    public static int extracting_Min(){
+<a name="6"></a><font color="#00FF00"><a href="match149-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+        if (size == 0){
+            return -1;
+        }
+        int min=heap[0];
+        heap[0]=heap[size-1];
+        size--;
+</font>        heap_Down(0);
+        return min;
+    }
+    //choto value hoile root er theke then oi value 
+    public static void heap_Up(int indx){
+<a name="5"></a><font color="#FF0000"><a href="match149-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+        while(indx&gt; 0){
+            int parent = (indx-1)/2;
+            if(heap[parent]&gt;heap[indx]){
+                swap(parent,indx);
+                indx=parent;
+            } 
+            else{
+</font>                break;
+            }
+        }
+
+    }
+    // boro valiue gula niche pathai
+    public static void heap_Down(int indx){
+        while(indx&lt;size){
+            int left=2*indx;
+<a name="0"></a><font color="#FF0000"><a href="match149-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+            int right=2*indx+1;
+            int smallest=indx;
+            if(left&lt;size &amp;&amp; heap[left]&lt;heap[smallest]){
+                smallest=left;
+            }
+            if(right&lt;size &amp;&amp; heap[right]&lt;heap[smallest]){
+                smallest=right;
+            }
+            if(smallest!=indx){
+                swap(smallest,indx);
+                indx=smallest;
+            } 
+            else{
+</font>                break;
+            }
+        }
+
+    }
+    //array te convert kore from heap
+    public static int[] getHeap(){
+        int[]new_arr = new int[size];
+        for (int i=0; i&lt;size; i++){
+            new_arr[i]=heap[i];
+        }
+<a name="4"></a><font color="#FF00FF"><a href="match149-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+        return new_arr;
+    }
+    public static void main(String[] args){
+        int[] task = {2,4,7,1,6}; // 
+        int m=4;                      
+        Heap(m);
+</font>        // 0 diye loads start korbo
+        for (int i=0; i&lt;m; i++){
+            insert(0);
+        }
+        for (int i=0; i&lt;task.length; i++){
+            int minLoad = extracting_Min();
+            insert(minLoad + task[i]);
+        }
+        int[] result = getHeap();
+        for (int i = 0; i &lt; result.length; i++){
+            System.out.print(result[i] + " ");
+        }
+    }
+}
+
+ASSIGNMENT 02
+public class top_large{
+    public static int[]heap;
+    public static int size;
+
+    public static void new_Heap(int capacity){
+        heap=new int[capacity];
+        size=0;
+    }
+    public static void insert(int val){
+        if (size&gt;= heap.length){
+            return;
+        }
+        heap[size] = val;
+        heap_Up(size);
+        size++;
+    }
+    // max alada korbo from the heap
+    public static int extracting_Max(){
+<a name="7"></a><font color="#0000FF"><a href="match149-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+        if(size==0){
+            return -1;
+        }
+        int max=heap[0];
+        heap[0]=heap[size-1];
+        size--;
+</font>        heap_Down(0);
+        return max;
+    }
+    public static void heap_Up(int idx){
+<a name="3"></a><font color="#00FFFF"><a href="match149-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+        while (idx&gt; 0){
+            int parent = (idx-1)/2;
+            if(heap[parent]&lt;heap[idx]){
+                swap(parent, idx);
+                idx = parent;
+            }
+            else{
+                break;
+</font>            }
+        }
+    }
+    public static void heap_Down(int idx){
+        while (idx&lt;size){
+            int l=2*idx+1;
+            int r=2*idx+2;
+<a name="1"></a><font color="#00FF00"><a href="match149-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+            int largest=idx;
+            if (l&lt;size &amp;&amp; heap[l]&gt;heap[largest]){
+                largest =l;
+            }
+            if(r&lt;size &amp;&amp; heap[r]&gt;heap[largest]){
+                largest =r;
+            }
+            if(largest != idx){
+                swap(largest, idx);
+                idx=largest;
+            }
+            else{
+                break;
+</font>            }
+        }
+    }
+    public static void swap(int p,int j){
+        int copy=heap[p];
+        heap[p]=heap[j];
+        heap[j]=copy;
+    }
+    public static int[]find_top(int[]arr, int k){
+        int n=arr.length;
+        new_Heap(n); // new heap banachi
+        for (int i=0; i&lt;n; i++){
+<a name="8"></a><font color="#00FFFF"><a href="match149-0.html#8" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+            insert(arr[i]);
+        }
+        //k bar amra heap theke max alada korbo and k size er array te rakhbo
+        int[]result=new int[k];
+        for (int i=0; i&lt;k; i++) {
+</font>            result[i]=extracting_Max();
+        }
+<a name="2"></a><font color="#0000FF"><a href="match149-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+        return result;
+    }
+    public static void main(String[]args){
+        int[]arr_origin={4,10,2,8,6,7};
+        int k=3;
+        int[]decend_result=find_top(arr_origin, k);
+</font>        for (int i=0; i&lt;decend_result.length; i++){ // array ke print korar jonno
+            System.out.print(decend_result[i] + " ");
+        }
+    }
+}
+
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<html>
+<head>
+<title>A8_Sec18_24101508_Sayem-Quraishi.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec18_24101508_Sayem-Quraishi.txt<p></p><pre>
+import java.util.*;
+
+public class MinHeap{
+
+    static class Heap{
+        private int[] elements;
+        private int count;
+
+        public Heap(int capacity){
+            elems=new int[capacity];
+            count=0;
+        }
+
+        public void add(int val){
+            if (count==elems.length){
+                   return;
+                }
+
+            elems[count]=val;
+            int curr=count;
+
+            while(curr&gt;0){
+                int par=(curr-1)/2;
+                if(elems[curr]&gt;=elems[par]){ 
+                       break;
+                   }
+                swap(curr,par);
+                curr=par;
+            }
+            count++;
+        }
+
+        public int rmvMin(){
+            if(count==0){
+<a name="3"></a><font color="#00FFFF"><a href="match81-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+                return 0;
+               }
+            int min=elems[0];
+            elems[0]=elems[count-1];
+            count--;
+            Sink(0);
+            return min;
+        }
+
+        private void Sink(int idx){
+            while(true){
+                int left=2*idx;
+</font>                if(left&gt;=count){
+<a name="5"></a><font color="#FF0000"><a href="match81-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+                     break; 
+                   }
+
+                int right=2*idx+1;
+                int small=left;
+
+                if(right&lt;count &amp;&amp; elems[right]&lt;elements[left]){
+                    smallest=right;
+                }
+
+                if(elements[idx]&lt;=elements[small]){ 
+</font>                    break;
+                   }
+                swap(idx,small);
+                idx=small;
+            }
+        }
+
+        public void Sort(){
+            int os=count;
+            int[]sorted=new int[os];
+
+            for(int i=0;i&lt;os;i++){
+                sorted[i]=rmvMin();
+            }
+
+            System.arraycopy(sorted,0,elems,0,os);
+            count=os;
+        }
+
+        public void Back(int val){
+            add(val);
+        }
+
+        public int[] currentHeap() {
+            return Arrays.copyOf(elements, count);
+        }
+
+        private void swap(int l,int m){
+            int temp=elems[l];
+            elems[l]=elems[m];
+            elems[m]=temp;
+        }
+    }
+
+    public static void main(String[]args){
+        Scanner input=new Scanner(System.in);
+
+        int Tasks=input.nextInt();
+        int[]Array=new int[Tasks];
+        for (int i=0;i&lt;Tasks;i++){
+            Array[i] =input.nextInt();
+        }
+
+        int hC=input.nextInt();
+        Heap myHeap=new Heap(hC);
+
+        for (int i=0;i&lt;heapCapacity;i++){
+            myHeap.add(0);
+        }
+
+        for (int task:Array){
+            int minLoad=myHeap.rmvMin();
+            myHeap.hBack(minLoad+task);
+        }
+
+        System.out.println(Arrays.toString(myHeap.currentHeap()));
+    }
+}
+
+
+//Task04
+
+<a name="4"></a><font color="#FF00FF"><a href="match81-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+class MaxHeap{
+    private int[]elems;
+    private int count;
+    private int limit;
+
+    public MaxHeap(int cap){
+        this.limit=cap;
+        this.count=0;
+        this.elem=new int[cap];
+</font>    }
+
+    private int pI(int i){
+           return i/2;
+           }
+    private int lC(int j){
+           return 2*i;
+           }
+    private int rC(int k){
+           return 2*i+1;
+           }
+
+    public void add(int val){
+        if(count==limit){
+           return;
+          }
+        elems[count]=val;
+        int curr=count;
+        count++;
+
+        while(current&gt;0 &amp;&amp; elems[pI(curr)]&lt;elems[curr]){
+            swap(curr,pI(cur));
+            curr=pI(curr);
+        }
+    }
+
+    public int rmvMax(){
+        if(count&lt;=0){
+           return -1;
+          }
+ 
+        if(count==1){
+           count--;
+           return elems[0];
+          }
+
+<a name="6"></a><font color="#00FF00"><a href="match81-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+        int maxVal=elems[0];
+        elems[0]=elems[count-1];
+        count--;
+        Sink(0);
+        return maxVal;
+    }
+
+    private void Sink(int i){
+</font>        int large=i;
+        int left=lC(i);
+<a name="2"></a><font color="#0000FF"><a href="match81-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+        int right=rC(i);
+
+        if (left&lt;count &amp;&amp; elems[left]&gt;elems[large]){
+               large=left;
+            }
+
+        if(right&lt;count &amp;&amp; elems[right]&gt;elems[large]){ 
+               large = right;
+            }
+
+        if(large!=i){
+            swap(i,large);
+</font>            Sink(large);
+        }
+    }
+
+    private void swap(int l,int m){
+<a name="0"></a><font color="#FF0000"><a href="match81-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_15.gif"/></a>
+
+        int temp=elems[l];
+        elems[l]=elems[m];
+        elems[m]=temp;
+    }
+}
+
+public class TopK{
+
+    public static int[]topKElems(int[]array,int k){
+        MaxHeap heap =new MaxHeap(array.length);
+
+        for(int i=0;i&lt;array.length;i++){
+            heap.add(array[i]);
+        }
+
+        int[]topK=new int[k];
+        for(int i=0;i&lt;k;i++){
+            topK[i]=heap.rmvMax();
+        }
+
+        return topK;
+    }
+
+    public static void main(String[]args){
+        int[]numbers={5,11,3,9,7,8};
+        int l=3;
+
+        int[]rslt=topKElems(numbers,l);
+</font><a name="1"></a><font color="#00FF00"><a href="match81-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_5.gif"/></a>
+
+
+        System.out.print("[");
+        for(int i=0;i&lt;rslt.length;i++){
+            System.out.print(rslt[i]);
+            if(i&lt;rslt.length-1){
+              System.out.print(", ");
+               }
+        System.out.println("]");
+</font>    }
+}
+</pre>
+</body>
+</html>

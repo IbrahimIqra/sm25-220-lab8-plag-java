@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>A8_Sec17_24101487_PRIYOTA-BANIK.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec12_20101605_Sania-Afroj-Sony.txt<p></p><pre>
+//////////////////task03////////////////////////
+
+<a name="1"></a><font color="#00FF00"><a href="match143-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_20.gif"/></a>
+
+public class Assignment8_task3
+{
+
+	public static int[] distribute(int[]tasks, int m)
+	{
+
+		MinHeap heap = new MinHeap(m);
+		
+		for (int i=0; i&lt;m; i++)
+		{
+			heap.insert(0);
+		}
+
+
+		for (int i=0; i&lt;tasks.length; i++) 
+		{
+			int min_load = heap.extractMin();
+			int new_load = min_load + tasks[i];
+			heap.insert(new_load);
+</font>		}
+		return heap.getHeap();
+	}
+
+<a name="0"></a><font color="#FF0000"><a href="match143-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_74.gif"/></a>
+
+	public static void main(String[] args) 
+	{
+		int[] tasks = {2, 4, 7, 1, 6};
+		int m = 4;
+		int[] res = distribute(tasks, m);
+
+		System.out.print("Final machine loads: [");
+		for (int i = 0; i &lt; res.length; i++) 
+		{
+			System.out.print(res[i]);
+			
+			if (i&lt;res.length-1) 
+			{
+			  System.out.print(", ");
+			}
+		}
+		System.out.println("]");
+	}
+}
+
+
+
+
+//////////////////task04////////////////////////
+
+
+public class Assignment8_task4 
+{
+	public static int[] top_k(int[]nums, int k) 
+	{
+		MaxHeap maxHeap = new MaxHeap(nums.length);
+
+    for (int i=0; i&lt;nums.length; i++) 
+    {
+        maxHeap.insert(nums[i]);
+    }
+
+
+		int[] res = new int[k];
+
+
+		for (int i=0; i&lt;k; i++) 
+		{
+			res[i] = maxHeap.extractMax();
+		}
+		return res;
+	}
+
+	public static void main(String[] args) 
+	{
+		int[] nums = {4, 10, 2, 8, 6, 7};
+		int k = 3;
+		int[] res = top_k(nums, k);
+
+		System.out.print("[");
+		for (int i=0; i&lt;res.length; i++)
+		{
+			System.out.print(res[i]);
+			
+			if (i&lt;res.length - 1) 
+			{
+			  System.out.print(", ");
+			}
+		}
+		System.out.println("]");
+</font>	}
+}
+
+
+
+/////////////////end/////////////////////
+
+</pre>
+</body>
+</html>

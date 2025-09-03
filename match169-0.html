@@ -1,0 +1,187 @@
+<html>
+<head>
+<title>A8_Sec18_24101391_Prarona-Dey-Mou---PRARONA-DEY-MOU.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec18_24101391_Prarona-Dey-Mou---PRARONA-DEY-MOU.txt<p></p><pre>
+﻿LAB 8
+
+
+//Task3
+
+
+<a name="1"></a><font color="#00FF00"><a href="match169-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_16.gif"/></a>
+
+public class Task3 {
+
+
+    public static int[] processingTime(int[] tasks, int m){
+
+
+        MinHeap time = new MinHeap(m);
+
+
+        for (int i = 0 ; i &lt; m ; i ++){
+
+
+            time.insert(0);
+
+
+        }
+
+
+        for (int i = 0 ; i &lt; tasks.length ; i++){
+
+
+            int small = time.extractMin();
+            int temp = tasks[i] + small;
+</font>            time.insert(temp);
+
+
+        }
+
+
+        int[] finalTime = new int [m];
+
+
+        for (int i = 0 ; i &lt; m ; i ++){
+
+
+            finalTime [i] = time.extractMin();
+
+
+        }
+
+
+        return finalTime;
+
+
+    }
+
+
+<a name="0"></a><font color="#FF0000"><a href="match169-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_67.gif"/></a>
+
+    public static void main(String[] args) {
+
+
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m = 4;
+
+
+        int[] task4 = processingTime(tasks, m);
+
+
+        System.out.print("[");
+
+
+        for (int i = 0 ; i &lt; task4.length ; i ++){
+
+
+            System.out.print(task4[i]);
+
+
+            if (i &lt; task4.length -1 ){
+
+
+                System.out.print(", ");
+
+
+            }
+
+
+        }
+
+
+        System.out.println("]");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+//Task4
+
+
+public class Task4 {
+
+
+    public static int[] topK(int[] nums, int k) {
+
+
+        MaxHeap max = new MaxHeap(nums.length);
+
+
+        for (int i = 0 ; i &lt; nums.length ; i++){
+
+
+            max.insert(nums[i]);
+
+
+        }
+
+
+        int[] largeVal = new int[k];
+
+
+        for (int i = 0 ; i &lt; k ; i++){
+
+
+            largeVal[i] = max.extractMax();
+
+
+        }
+
+
+        return largeVal;
+
+
+    }
+
+
+
+
+    public static void main(String[] args) {
+
+
+        int[] nums = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+
+
+        int[] topK = topK(nums, k);
+
+
+        System.out.print("[");
+
+
+        for (int i = 0; i &lt; topK.length; i++) {
+
+
+            System.out.print(topK[i]);
+
+
+            if (i &lt; topK.length - 1) {
+
+
+                System.out.print(", ");
+
+
+            }
+
+
+        }
+
+
+        System.out.println("]");
+</font>    }
+
+
+}</pre>
+</body>
+</html>

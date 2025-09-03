@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>A8_Sec08_24301042_Tanzim-Rahman---TANZIM-RAHMAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec26_24101363_Syeda-Fatima-Tasnia.txt<p></p><pre>
+﻿//Task3
+
+
+
+
+<a name="3"></a><font color="#00FFFF"><a href="match106-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+class MinHeap{
+  private int[]h;
+  private int lng;
+  private int c;
+  MinHeap(int cc){
+    this.h=new int[cc];
+    this.c=cc;
+</font>  }
+  public int removeMin(int cc){
+    int t=h[0];
+    h[0]=h[lng-1];
+    this.h[this.lng-1]=cc;
+<a name="0"></a><font color="#FF0000"><a href="match106-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_12.gif"/></a>
+
+    heapify(0);
+    return t;
+  }
+  public void heapify(int idx){
+    int l=2*idx+1;
+    int r=2*idx+2;
+    if(l&gt;=this.lng){
+      return;
+    }
+    int s=l;
+    if(r&lt;this.lng&amp;&amp;this.h[s]&gt;this.h[r]){
+      s=r;
+    }
+    if(this.h[idx]&gt;this.h[s]){
+      int t=this.h[idx];
+      this.h[idx]=this.h[s];
+      this.h[s]=t;
+      heapify(s);
+</font>    }
+  }
+  public void insert(int cc){
+    if(this.lng&gt;=this.c){
+      cc=cc+h[0];
+      removeMin(cc);
+    }
+    else{
+      h[this.lng]=cc;
+      swim(this.lng);
+      this.lng++;
+    }
+  }
+  public void swim(int n){
+    int p=(n-1)/2;
+    while(n&gt;0&amp;&amp;h[p]&gt;h[n]){
+      int t=h[p];
+      h[p]=h[n];
+      h[n]=t;
+      n=p;
+      p=(n-1)/2;
+    }
+  }
+  public static int[] nt(int tt[],int m){
+    MinHeap heap=new MinHeap(m);
+    for(int i=0; i&lt;tt.length; i++){
+      int c=heap.removeMin(m);
+      int ins=c+tt[i];
+      heap.insert(ins);
+    }
+    return heap.getheap();
+  }
+<a name="6"></a><font color="#00FF00"><a href="match106-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+  public static void main(String[]args){
+    int[]t={2,4,7,1,6};
+    int m=4;
+    int r[]=nt(t,m);
+</font>    for(int i=0; i&lt;r.length; i++){
+      System.out.print(r[i]+" ");
+    }
+    System.out.println();
+  }
+  public int[]getheap(){
+    return h;
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Task4
+
+
+
+
+<a name="4"></a><font color="#FF00FF"><a href="match106-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+class MaxHeap{
+  private int[]h;
+  private int lng;
+  private int c;
+  MaxHeap(int cc){
+    this.h=new int[cc];
+    this.c=cc;
+</font>  }
+   
+  public static int[] removeHeap(MaxHeap hp,int k){
+     int t[]=new int[k];
+     for(int i=0; i&lt;k; i++){
+        t[i]=hp.h[0];
+        hp.h[0]=hp.h[hp.lng-1];
+        hp.h[hp.lng-1]=0;
+        hp.lng--;
+<a name="7"></a><font color="#0000FF"><a href="match106-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+        hp.heapify(0);
+     }
+        return t;
+    }
+  public void heapify(int idx){
+    int l=2*idx+1;
+    int r=2*idx+2;
+</font>    if(l&gt;=this.lng){
+      return;
+    }
+    int lrg=l;
+    if(r&lt;this.lng&amp;&amp;this.h[lrg]&lt;this.h[r]){
+      l=r;
+    }
+<a name="5"></a><font color="#FF0000"><a href="match106-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+    if(this.h[idx]&lt;this.h[lrg]){
+       int tmp=this.h[idx];
+       this.h[idx]=this.h[lrg];
+</font>       this.h[lrg]=tmp;
+       heapify(lrg);
+  }
+  }
+  public void insert(int n){
+    if(this.lng&gt;=c){
+      return;
+    }
+    this.h[this.lng]=n;
+    swim(this.lng);
+    lng=lng+1;
+  }
+<a name="1"></a><font color="#00FF00"><a href="match106-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+  public void swim(int nm){
+    int sw=(nm-1)/2;
+    while(nm&gt;0&amp;&amp;this.h[nm]&gt;this.h[sw]){
+      int tm=this.h[nm];
+      this.h[nm]=this.h[sw];
+      this.h[sw]=tm;
+</font>      nm=sw;
+      sw=(nm-1)/2;
+    }
+  }
+   public static void main(String[]args){
+    int a[]={4,10,2,8,6,7};
+    int k=3;
+    int lr[]=largeV(a,k);
+    lr=removeHeap(heap,k);
+   for(int i=0; i&lt;lr.length; i++){
+      System.out.print(a[i]+" ");
+    }
+    System.out.println();
+  }
+<a name="2"></a><font color="#0000FF"><a href="match106-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+public static int[] largeV(int[]num,int k) {
+        MaxHeap heap = new MaxHeap(num.length);
+        for (int i = 0; i &lt; num.length; i++) {
+            heap.insert(num[i]);
+</font>        }
+  }
+  
+}</pre>
+</body>
+</html>

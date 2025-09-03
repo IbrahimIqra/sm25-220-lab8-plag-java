@@ -1,0 +1,328 @@
+<html>
+<head>
+<title>A8_Sec08_24301052_Md-Rafid-Hayder.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec08_24301262_Mahmudul-Hasan-Jami-.txt<p></p><pre>
+//Task03
+
+public class Task3 {
+
+    private int size;
+
+    private int[] heap;
+
+    private int capacity;
+
+    public Task3(int capacity) {
+
+        this.capacity = capacity;
+
+        heap = new int[capacity];
+
+        size = 0;
+
+    }
+
+    public void insert(int val) {
+
+<a name="0"></a><font color="#FF0000"><a href="match197-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_10.gif"/></a>
+
+        if (size &gt;= capacity) {
+
+            System.out.println("Heap is full");
+
+            return;
+
+        }
+
+        heap[size] = val;
+
+        swim(size);
+
+        size++;
+
+    }
+
+    public void swim(int index) {
+
+        int parent  = (index - 1) / 2;
+
+        while (index &gt; 0 &amp;&amp; heap[index] &lt; heap[parent]) {
+
+            int temp = heap[index];
+
+            heap[index] = heap[parent];
+
+            heap[parent] = temp;
+
+            index = parent;
+
+            parent = (index - 1) / 2;
+
+        }
+
+    }
+
+    public int min(){
+
+        if (size &lt;= 0){
+</font>
+            System.out.println("Heap is empty");
+
+            return -1;
+
+        }
+
+        int temp = heap[0];
+
+        heap[0] = heap[size-1];
+
+        heap[size-1] = 0;
+
+        size--;
+
+        heapify(0);
+
+        return temp;
+
+    }
+
+    public void heapify(int index){
+
+        int left  = 2 * index + 1;
+
+        int right = 2 * index + 2;
+
+        if (left &gt;= size){
+
+            return;
+
+        }
+
+<a name="2"></a><font color="#0000FF"><a href="match197-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_6.gif"/></a>
+
+        int min = left;
+
+        if (right &lt; size &amp;&amp; heap[right] &lt; heap[min]){
+
+            min = right;
+
+        }
+
+        if (heap[index] &gt; heap[min]){
+
+            int temp = heap[index];
+
+            heap[index] = heap[min];
+
+            heap[min] = temp;
+</font>
+            heapify(min);
+
+        }
+
+    }
+
+    public static void main(String [] args) {
+
+        int[] arr = {2, 4, 7, 1, 6};
+
+        int m = 4;
+
+        Task3 t = new Task3(m * arr.length);
+
+        for (int i = 0; i &lt; m; i++) {
+
+            t.insert(arr[i]);
+
+        }
+
+        for (int i = m; i &lt; arr.length; i++) {
+
+            int amount = t.min();
+
+            amount += arr[i];
+
+<a name="4"></a><font color="#FF00FF"><a href="match197-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+            t.insert(amount);
+
+        }
+
+        int [] vals = new int [m];
+
+        for (int i = 0; i &lt; m; i++) {
+
+            vals[i] = t.min();
+</font>
+        }
+
+        for (int i = 0; i &lt; vals.length; i++) {
+
+            System.out.print(vals[i] + " ");
+
+        }
+
+    }
+
+}
+
+
+//Task04
+
+
+public class Task4 {
+
+    private int size;
+
+    private int[] heap;
+
+    private int capacity;
+
+    public Task4(int capacity) {
+
+        this.capacity = capacity;
+
+        heap = new int[capacity];
+
+        size = 0;
+
+    }
+
+    public void insert(int val) {
+
+<a name="1"></a><font color="#00FF00"><a href="match197-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_10.gif"/></a>
+
+        if (size &gt;= capacity) {
+
+            System.out.println("Heap is full");
+
+            return;
+
+        }
+
+        heap[size] = val;
+
+        swim(size);
+
+        size++;
+
+    }
+
+    public void swim(int index) {
+
+        int parent  = (index - 1) / 2;
+
+        while (index &gt; 0 &amp;&amp; heap[index] &gt; heap[parent]) {
+
+            int temp = heap[index];
+
+            heap[index] = heap[parent];
+
+            heap[parent] = temp;
+
+            index = parent;
+
+            parent = (index - 1) / 2;
+
+        }
+
+    }
+
+    public int max(){
+
+        if (size &lt;= 0){
+</font>
+            System.out.println("Heap is empty");
+
+            return -1;
+
+        }
+
+        int temp = heap[0];
+
+        heap[0] = heap[size-1];
+
+        heap[size-1] = 0;
+
+        size--;
+
+        heapify(0);
+
+        return temp;
+
+    }
+
+    public void heapify(int index){
+
+        int left  = 2 * index + 1;
+
+        int right = 2 * index + 2;
+
+        if (left &gt;= size){
+
+            return;
+
+        }
+
+<a name="3"></a><font color="#00FFFF"><a href="match197-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_6.gif"/></a>
+
+        int max = left;
+
+        if (right &lt; size &amp;&amp; heap[right] &gt; heap[max]){
+
+            max = right;
+
+        }
+
+        if (heap[index] &lt; heap[max]){
+
+            int temp = heap[index];
+
+            heap[index] = heap[max];
+
+            heap[max] = temp;
+</font>
+            heapify(max);
+
+        }
+
+    }
+
+    public static void main(String [] args) {
+
+        int[] arr = {4, 10, 2, 8, 6,7};
+
+        Task4 t = new Task4(arr.length);
+
+        int k = 3;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+
+            t.insert(arr[i]);
+
+        }
+
+        int [] vals = new int [k];
+
+        for (int i = 0; i &lt; k; i++) {
+
+            vals[i] = t.max();
+
+        }
+
+        for (int i = 0; i &lt; vals.length; i++) {
+
+            System.out.print(vals[i] + " ");
+
+        }
+
+    }
+
+}
+
+</pre>
+</body>
+</html>

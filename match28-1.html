@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>A8_Sec23_24101216_FATIMAH-MIAZI.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec05_24101045_Shabnoom-Tayammum.txt<p></p><pre>
+//task3
+<a name="0"></a><font color="#FF0000"><a href="match28-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_40.gif"/></a>
+
+public class Task3{
+   private static int findmini(int[]t){
+        int minimum=0;
+      for(int i=1;i&lt;t.length;i++){
+            if(t[i]&lt;t[minimum]){
+                minimum=i;
+            }
+        }
+        return minimum;
+    }
+   private static void mini_swim(int[]p,int indx){
+        int prnt=indx-1/2;
+        while(0&lt;indx &amp;&amp; p[indx]&lt;p[prnt]){
+          swap(p,indx,prnt);
+          indx=prnt;
+          prnt=indx-1/2;
+        }
+    }
+   private static void swap(int[]x,int y,int z){
+        int temporary=x[y];
+        x[y]=x[z];
+        x[z]=temporary;
+    }
+
+  
+  public static int[] method1(int[]tasks,int s){ 
+  int[]v= new int[s];
+   for(int i=0;i&lt;s;i++){
+     v[i]=0;
+        }
+   for(int i=0;i&lt;tasks.length;i++){
+            int u=tasks[i];
+            int mini_indx=findmini(v);
+            v[mini_indx]+=u;
+            mini_swim(v,mini_indx);
+        }
+           return v;
+    }
+  }
+
+
+
+//task4
+
+
+public class Task4{
+  private static void swap(int[]x,int y,int z){
+</font><a name="1"></a><font color="#00FF00"><a href="match28-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_32.gif"/></a>
+
+        int temporary=x[y];
+        x[y]=x[z];
+        x[z]=temporary;
+    }
+
+  private static void maxi_swim(int[]s,int indx){
+        int prnt=(indx-1)/2;
+        while(0&lt;indx &amp;&amp; s[indx]&gt;s[prnt]){
+          swap(s,indx,prnt);
+          indx=prnt;
+          prnt=(indx-1)/2;
+        }
+    }
+  private static int find_maxi(int[]u,int v){
+    if(v==0){
+      return -1;
+        }
+    int maxi=u[0];
+    u[0]=u[v-1]; 
+    u[v-1]=0;
+    max_he(u,v-1,0);
+    return maxi;
+    }
+ private static void max_he(int[]p,int n,int indx){
+        int maxi=indx;
+        int left=2*indx+1;
+        int right=2*indx+2;
+</font>        if(n&gt;left &amp;&amp; p[left]&gt;p[maxi]){
+            maxi=left;
+        }
+<a name="2"></a><font color="#0000FF"><a href="match28-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_21.gif"/></a>
+
+        if(n&gt;right &amp;&amp; p[right]&gt;p[maxi]){
+            maxi=right;
+        }
+        if(maxi!=indx){
+            swap(p,indx,maxi);
+            max_he(p,n,maxi);
+        }
+    }
+
+    public static int[] findi(int[]d,int k){
+        int o=d.length;
+        int[]p=new int[o];
+        for(int i=0;i&lt;o;i++){
+            p[i]=d[i];
+            maxi_swim(p,i); 
+        }
+        int[]r=new int[k];
+        for (int i=0;i&lt;k;i++){
+            r[i]=find_maxi(p,o-i);
+        }
+            return r;
+</font>    }
+ } 
+  </pre>
+</body>
+</html>

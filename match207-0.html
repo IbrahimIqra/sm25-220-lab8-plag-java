@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>A8_Sec07_24301563_Raiyan-Hossain-Araf---RAIYAN-HOSSAIN-ARAF.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec07_24301563_Raiyan-Hossain-Araf---RAIYAN-HOSSAIN-ARAF.txt<p></p><pre>
+								TASK 3
+
+
+
+import java.util.Scanner;
+
+public class Task3{
+    public static void main(String[] args) {
+
+
+        System.out.println("How many numbers do you want?");
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        System.out.println("How many numbers do you want in your array?");
+<a name="3"></a><font color="#00FFFF"><a href="match207-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+        int m = sc.nextInt();
+        int[] arr1 = new int[m];
+
+
+        for(int i = 0; i &lt; m; i++){
+</font>
+            System.out.println("Enter number "+(i+1)+": ");
+            arr1[i] = sc.nextInt();
+
+        }
+
+
+        int[] arr2 = taskmanagement(arr1,k);
+
+
+        for(int i = 0; i &lt; k; i++){
+            if(i==0){
+                System.out.print("[ ");
+            }
+            if(i!=k-1) {
+                System.out.print(arr2[i] + ", ");
+            }
+            else{
+<a name="4"></a><font color="#FF00FF"><a href="match207-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+                System.out.print(arr2[i]+" ]");
+            }
+        }
+
+
+    }
+
+    public static int[] taskmanagement(int[] arr1, int k){
+
+        int[] rslt = new int[k];
+        int size =0;
+</font>
+        for(int i = 0; i &lt;k; i++){
+
+            size=insert(rslt,0,size);
+
+        }
+        for(int task : arr1){
+
+            int cl= remove(rslt,size);
+            size--;
+
+            int ul=cl+task;
+            size=insert(rslt,ul,size);
+
+
+        }
+
+        int[] rslt2 = new int[k];
+
+<a name="2"></a><font color="#0000FF"><a href="match207-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+        for (int i = 0; i &lt; k; i++){
+
+            rslt2[i] = remove(rslt, size);
+            size--;
+
+
+        }
+
+
+        return rslt2;
+
+    }
+
+   
+
+    private static void heap(int[] arr1,int m,int i){
+</font><a name="0"></a><font color="#FF0000"><a href="match207-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_11.gif"/></a>
+
+
+        int lowest = i;
+        int left= 2*i+1;
+        int right =2*i+2;
+
+        if(left&lt;m &amp;&amp;arr1[left]&lt; arr1[lowest]){
+
+            lowest = left;
+
+        }
+
+        if(right&lt;m&amp;&amp; arr1[right] &lt;arr1[lowest]){
+
+            lowest = right;
+
+        }
+
+        if(lowest!= i){
+
+            int temp = arr1[i];
+
+            arr1[i] = arr1[lowest];
+            arr1[lowest] = temp;
+
+            heap(arr1,m,lowest);
+</font>
+
+        }
+    }
+
+    private static int insert(int[] arr1,int k, int size){
+
+        if(size==arr1.length){
+
+            return size;
+
+        }
+
+        arr1[size] =k;
+
+        int i =size;
+
+        while(i&gt;0){
+
+            int parent = (i-1)/2;
+
+<a name="5"></a><font color="#FF0000"><a href="match207-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+            if(arr1[parent]&gt;arr1[i]){
+
+                int temp = arr1[parent];
+                 arr1[parent] = arr1[i];
+
+                 arr1[i] = temp;
+</font>                i =parent;
+
+
+            }
+            else{
+
+                break;
+
+            }
+        }
+
+                return size+1;
+    }
+
+    private static int remove(int[]arr, int size){
+
+
+        if(size&lt;=0){
+
+            return 0;
+
+        }
+
+        int root = arr[0];
+        arr[0] = arr[size-1];
+
+        heap(arr,size-1,0);
+
+        return root;
+
+
+    }
+}
+
+
+
+
+								TASK 4
+
+
+import java.util.Scanner;
+public class Task4 {
+    public static void main(String[] args){
+
+       System.out.println("How many numbers do you want?");
+       Scanner sc = new Scanner(System.in);
+       int k = sc.nextInt();
+       System.out.println("How many numbers do you want in your array?");
+       int m = sc.nextInt();
+       int[] arr1 = new int[m];
+
+       for(int i = 0; i &lt; m; i++){
+           System.out.println("Enter number "+(i+1)+": ");
+           arr1[i] = sc.nextInt();
+       }
+
+       
+
+       createMaxHeap( m, arr1);
+
+       for(int i = 0; i &lt; k; i++){
+
+           if(i==0){
+
+               System.out.print("[ ");
+
+           }
+
+           if(i&lt;k-1) {
+               System.out.print(remove(arr1, m)+", ");
+           }
+
+           else{
+
+               System.out.print(remove(arr1, m)+" ]");
+
+           }
+
+       }
+
+
+
+    }
+
+    private static void createMaxHeap(int m,int[] arr1){
+
+        for(int i=m/2-1;i&gt;=0;i--){
+
+            heap(arr1,m,i);
+
+        }
+
+
+    }
+
+<a name="1"></a><font color="#00FF00"><a href="match207-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_11.gif"/></a>
+
+    private static void heap(int[] arr1,int m,int i){
+
+        int largest = i;
+        int left= 2*i+1;
+         int right =2*i+2;
+
+        if(left&lt;m &amp;&amp;arr1[left]&gt; arr1[largest]){
+
+            largest = left;
+
+        }
+
+        if(right&lt;m&amp;&amp; arr1[right] &gt;arr1[largest]){
+
+             largest = right;
+
+        }
+
+        if(largest!= i){
+
+             int temp = arr1[i];
+             
+            arr1[i] = arr1[largest];
+            arr1[largest] = temp;
+
+            heap(arr1,m,largest);
+</font>
+
+        }
+    }
+
+    private static int remove(int[]arr, int size){
+
+
+        if(size&lt;=0){
+
+        return 0;
+
+        }
+
+        int root = arr[0];
+        arr[0] = arr[size-1];
+
+        heap(arr,size-1,0);
+
+        return root;
+
+
+    }
+}</pre>
+</body>
+</html>

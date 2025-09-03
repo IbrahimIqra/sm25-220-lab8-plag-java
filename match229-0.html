@@ -1,0 +1,251 @@
+<html>
+<head>
+<title>A8_Sec11_24201381_Md.-Riyad.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec11_24201381_Md.-Riyad.txt<p></p><pre>
+Task 01
+public class TimeProcess{
+  public static int[] taskStep(int[] tasks,int m){
+    if(tasks==null||tasks.length==0||m&lt;=0){
+      return new int[0];
+    }
+    
+<a name="4"></a><font color="#FF00FF"><a href="match229-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+    MinHeap heap=new MinHeap(m);
+    for(int i=0;i&lt;m;i++){
+      heap.insert(0);
+    }
+    
+    for(int i=0;i&lt;tasks.length;i++){
+      int task=tasks[i];
+</font>      int minLoad=heap.extractMin();
+      heap.insert(minLoad+task);
+    }
+    
+    return heap.getSrtArray();
+  }
+
+class MinHeap {
+  private int[] heap;
+  private int size;
+  private int cap;
+  
+  public MinHeap(int cap){
+    this.cap=cap;
+    this.heap=new int[cap];
+    this.size=0;
+  }
+  
+  public void insert(int value){
+    if(size==cap){
+      rsz();
+    }
+    heap[size]=value;
+    swim(size);
+    size++;
+  }
+  
+<a name="2"></a><font color="#0000FF"><a href="match229-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+  public int extractMin(){
+    if(size==0){
+      return -1;
+    }
+    int min=heap[0];
+    heap[0]=heap[size-1];
+    size--;
+    sink(0);
+    return min;
+</font><a name="5"></a><font color="#FF0000"><a href="match229-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+  }
+  
+  private void swim(int ix){
+    int prnt=(ix-1)/2;
+    while(ix&gt;0 &amp;&amp; heap[ix]&lt;heap[prnt]){
+</font>      swap(ix,prnt);
+      ix=prnt;
+<a name="0"></a><font color="#FF0000"><a href="match229-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+      prnt=(ix-1)/2;
+    }
+  }
+  
+  private void sink(int ix){
+    int lftChld=2*ix+1;
+    int rghtChld=2*ix+2;
+    int smlst=ix;
+    
+    if(lftChld&lt;size &amp;&amp; heap[lftChld]&lt;heap[smlst]){
+      smlst=lftChld;
+    }
+    if(rghtChld&lt;size &amp;&amp; heap[rghtChld]&lt;heap[smlst]){
+      smlst=rghtChld;
+    }
+    if(smlst!=ix){
+</font>      swap(ix,smlst);
+      sink(smlst);
+    }
+  }
+  
+  private void swap(int i,int j){
+    int temp=heap[i];
+    heap[i]=heap[j];
+    heap[j]=temp;
+  }
+  
+  private void rsz(){
+    cap*=2;
+    int[] newHeap=new int[cap];
+    for(int i=0;i&lt;size;i++){
+      newHeap[i]=heap[i];
+    }
+    heap=newHeap;
+  }
+  
+  public int[] getHeapArray(){
+    int[] rslt=new int[size];
+    for(int i=0;i&lt;size;i++){
+      rslt[i]=heap[i];
+    }
+    return rslt;
+  }
+  public int[] getSrtArray(){
+    int[] rslt=getHeapArray();
+    java.util.Arrays.sort(rslt);
+    return rslt;
+  }
+  
+  public void sort(){
+    int orgSize=size;
+    for(int i=size-1;i&gt;0;i--){
+      swap(0,i);
+      size--;
+      sink(0);
+    }
+    size=orgSize;
+  }
+}
+
+Task02
+public class FindLargest{
+  public static int[] findingLrgst(int[] nums,int k){
+    if(nums==null||nums.length==0||k&lt;=0||k&gt;nums.length){
+      return new int[0];
+    }
+    
+    MaxHeap heap=new MaxHeap(nums.length);
+    for(int i=0;i&lt;nums.length;i++){
+      heap.insert(nums[i]);
+    }
+    
+    int[] rslt=new int[k];
+    for(int i=0;i&lt;k;i++){
+      rslt[i]=heap.fndMax();
+    }
+    
+    return rslt;
+  }
+}
+
+class MaxHeap {
+  private int[] heap;
+  private int size;
+  private int cap;
+  
+  public MaxHeap(int cap){
+    this.cap=cap;
+    this.heap=new int[cap];
+    this.size=0;
+  }
+  
+  public void insert(int val){
+    if(size==cap){
+      rsz();
+    }
+    heap[size]=val;
+    swim(size);
+    size++;
+  }
+  
+<a name="3"></a><font color="#00FFFF"><a href="match229-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+  public int fndMax(){
+    if(size==0){
+      return -1;
+    }
+    int max=heap[0];
+    heap[0]=heap[size-1];
+    size--;
+    sink(0);
+</font><a name="6"></a><font color="#00FF00"><a href="match229-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+    return max;
+  }
+  
+  private void swim(int ix){
+    int prnt=(ix-1)/2;
+    while(ix&gt;0 &amp;&amp; heap[ix]&gt;heap[prnt]){
+</font>      swap(ix,prnt);
+      ix=prnt;
+<a name="1"></a><font color="#00FF00"><a href="match229-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+      prnt=(ix-1)/2;
+  }
+  }
+  
+  private void sink(int ix){
+    int lftChld=2*ix+1;
+    int rghtChld=2*ix+2;
+    int lrgst=ix;
+    
+    if(lftChld&lt;size &amp;&amp; heap[lftChld]&gt;heap[lrgst]){
+      lrgst=lftChld;
+    }
+    if(rghtChld&lt;size &amp;&amp; heap[rghtChld]&gt;heap[lrgst]){
+      lrgst=rghtChld;
+    }
+    if(lrgst!=ix){
+</font>      swap(ix,lrgst);
+      sink(lrgst);
+    }
+  }
+  
+  private void swap(int i,int j){
+    int tmp=heap[i];
+    heap[i]=heap[j];
+    heap[j]=tmp;
+  }
+  
+  private void rsz(){
+    cap=cap*2;
+    int[] newHeap=new int[cap];
+    for(int i=0;i&lt;size;i++){
+      newHeap[i]=heap[i];
+    }
+    heap=newHeap;
+  }
+  
+  public int[] getHeapArray(){
+    int[] rslt=new int[size];
+    for(int i=0;i&lt;size;i++){
+      rslt[i]=heap[i];
+    }
+    return rslt;
+  }
+  
+  public void sort(){
+    int orgSize=size;
+    for(int i=size-1;i&gt;0;i--){
+      swap(0,i);
+      size--;
+      sink(0);
+    }
+    size=orgSize;
+  }
+}</pre>
+</body>
+</html>

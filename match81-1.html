@@ -1,0 +1,240 @@
+<html>
+<head>
+<title>A8_Sec18_24101508_Sayem-Quraishi.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec23_24301068_Alif-Hossain-Sajib.txt<p></p><pre>
+Task 3:
+public class Task3 {
+    public static int[] distributeTasks(int[] tasks, int m) {
+        MinHeap heap = new MinHeap(m);
+
+        for (int i = 0; i &lt; m; i++) {
+            heap.insert(0);
+        }
+
+        for (int i = 0; i &lt; tasks.length; i++) {
+            heap.insertRebalance(tasks[i]);
+        }
+
+        return heap.getArray();
+    }
+
+    public static void main(String[] args) {
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m = 4;
+
+        int[] result = distributeTasks(tasks, m);
+<a name="1"></a><font color="#00FF00"><a href="match81-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_5.gif"/></a>
+
+
+        System.out.print("[");
+        for (int i = 0; i &lt; result.length; i++) {
+            System.out.print(result[i]);
+            if (i &lt; result.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+</font>    }
+}
+
+<a name="4"></a><font color="#FF00FF"><a href="match81-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+class MinHeap {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public MinHeap(int capacity) {
+        this.capacity = capacity;
+        this.size = 0;
+        this.heap = new int[capacity];
+</font>    }
+
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full !!!");
+            return;
+        }
+        heap[size] = value;
+        size++;
+        swim(size - 1);
+    }
+
+    public void swim(int index) {
+        while (index &gt; 0) {
+            int parent = (index - 1) / 2;
+            if (heap[index] &lt; heap[parent]) {
+                swap(index, parent);
+                index = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public int extractMin() {
+<a name="3"></a><font color="#00FFFF"><a href="match81-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+        if (size == 0) return -1; 
+        int root = heap[0];
+        heap[0] = heap[size - 1];
+        size--;
+        sink(0);
+        return root;
+    }
+
+    public void sink(int index) {
+        while (true) {
+            int left = 2 * index + 1;
+</font><a name="5"></a><font color="#FF0000"><a href="match81-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+            int right = 2 * index + 2;
+            int smallest = index;
+
+            if (left &lt; size &amp;&amp; heap[left] &lt; heap[smallest]) {
+                smallest = left;
+            }
+            if (right &lt; size &amp;&amp; heap[right] &lt; heap[smallest]) {
+</font>                smallest = right;
+            }
+            if (smallest != index) {
+                swap(index, smallest);
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void insertRebalance(int value) {
+        int minVal = extractMin();
+        int newVal = minVal + value;
+        insert(newVal);
+    }
+
+    public int[] getArray() {
+        int[] result = new int[size];
+        for(int i = 0; i &lt; size; i++) {
+            result[i] = heap[i];
+        }
+        return result;
+    }
+
+    public void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+}
+
+Task 4:
+class MaxHeap {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public MaxHeap(int capacity) {
+        this.capacity = capacity;
+        this.size = 0;
+        this.heap = new int[capacity];
+    }
+
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full !!!");
+            return;
+        }
+        heap[size] = value;
+        size++;
+        swim(size - 1);
+    }
+
+    public void swim(int index) {
+        while (index &gt; 0) {
+            int parent = (index - 1) / 2;
+            if (heap[index] &gt; heap[parent]) {
+                swap(index, parent);
+                index = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public int extractMax() {
+        if (size == 0) 
+            return -1;
+<a name="6"></a><font color="#00FF00"><a href="match81-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+        int root = heap[0];
+        heap[0] = heap[size - 1];
+        size--;
+        sink(0);
+        return root;
+    }
+
+    public void sink(int index) {
+</font>        while (true) {
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
+<a name="2"></a><font color="#0000FF"><a href="match81-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+            int largest = index;
+
+            if (left &lt; size &amp;&amp; heap[left] &gt; heap[largest]) {
+                largest = left;
+            }
+            if (right &lt; size &amp;&amp; heap[right] &gt; heap[largest]) {
+                largest = right;
+            }
+            if (largest != index) {
+                swap(index, largest);
+</font>                index = largest;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void swap(int i, int j) {
+<a name="0"></a><font color="#FF0000"><a href="match81-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_14.gif"/></a>
+
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+}
+
+public class Task4 {
+    public static int[] topK(int[] nums, int k) {
+        MaxHeap heap = new MaxHeap(nums.length);
+
+        for (int i = 0; i &lt; nums.length; i++) {
+            heap.insert(nums[i]);
+        }
+
+        int[] result = new int[k];
+        for (int i = 0; i &lt; k; i++) {
+            result[i] = heap.extractMax();
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+
+        int[] result = topK(nums, k);
+</font>
+        System.out.print("[");
+        for (int i = 0; i &lt; result.length; i++) {
+            System.out.print(result[i]);
+            if (i &lt; result.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>A8_Sec09_24241069_FYAZ-AHMAD-SAAD---FYAZ-AHMAD-SAAD.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec09_24241069_FYAZ-AHMAD-SAAD---FYAZ-AHMAD-SAAD.txt<p></p><pre>
+//Task-03
+
+public class Task03{
+    public static class MinHeap {
+        private int [] array;
+        private int size;
+    
+        public MinHeap(int capacity){
+        array = new int [capacity];
+        }
+
+        public void insert (int data){
+<a name="1"></a><font color="#00FF00"><a href="match88-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_8.gif"/></a>
+
+            array[size] = data;
+            int indx = size;
+            int idx = (indx-1)/2;
+            swim(indx, idx);
+            size++;
+        }
+
+        private void swim(int indx, int idx){
+            while (indx&gt;0 &amp;&amp; array[indx] &lt; array[idx]) {
+                swap(indx,idx);
+                indx = idx;
+                idx = (indx-1)/2;
+</font>            }
+        }
+        private void swap(int a, int b){
+            int temp = array[a];
+            array[a] = array[b];
+            array[b] = temp;
+        }
+        public int extractMin(){
+            int store = array[0];
+            swap(0, size-1);
+            size--;
+            sink(0, size);
+<a name="0"></a><font color="#FF0000"><a href="match88-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_9.gif"/></a>
+
+            return store;
+        }
+        private void sink(int k, int m){
+            int left = 2*k+1;
+            int right = 2*k+2;
+            int minIndex = k;
+       
+            if (left&lt;m &amp;&amp; array[minIndex] &gt; array[left]) {
+                minIndex = left;
+            }
+            if (right&lt;m &amp;&amp; array[minIndex] &gt; array[right]) {
+                minIndex = right;
+            }
+            if (minIndex != k) {
+                swap(k, minIndex);
+                sink(minIndex, m);
+</font>            }
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+    }
+<a name="5"></a><font color="#FF0000"><a href="match88-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+    public static void heapInsert (int [] array, int m){
+        MinHeap heap = new MinHeap(m);
+        for (int i = 0; i &lt; m; i++) {
+             heap.insert(array[i]);
+</font>        }
+        int indx = m;
+        while (heap.isEmpty() == false){
+            int v = heap.extractMin();
+            heap.insert(v + array[indx]);
+            indx++;
+
+            if(indx == array.length){
+                break;
+            }
+        }
+        if (heap.isEmpty() == false){
+            for (int i = 0; i &lt; array.length-1; i++) {
+                System.out.print(heap.extractMin()+" ");
+            }
+            System.out.println();
+        }
+    }
+<a name="6"></a><font color="#00FF00"><a href="match88-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+    public static void main (String []args){
+        int[] array = {2,4,7,1,6};
+        int m = 4;
+        heapInsert(array, m);
+</font>    }
+}
+
+
+//Task-04
+
+public class Task04{
+    public static class MaxHeap {
+    private int [] array;
+    private int size;
+    private boolean isEmpty;
+    
+    public MaxHeap(int capacity){
+        array = new int [capacity];
+    }
+
+    public void insert (int data){
+<a name="8"></a><font color="#00FFFF"><a href="match88-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+        array[size] = data;
+        int indx = size;
+        int idx = (indx-1)/2;
+        swim(indx, idx);
+</font>        size++;
+    }
+
+    private void swim(int indx, int idx){
+        while (indx&gt;0 &amp;&amp; array[indx] &gt; array[idx]) {
+            swap(indx,idx);
+            indx = idx;
+            idx = (indx-1)/2;
+        }
+    }
+    private void swap(int a, int b){
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
+    public int extractMax(){
+        int store = array[0];
+        swap(0, size-1);
+        size--;
+        sink(0, size);
+<a name="2"></a><font color="#0000FF"><a href="match88-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+        return store;
+    }
+    private void sink(int k, int m){
+        int left = 2*k+1;
+        int right = 2*k+2;
+        int minIndex = k;
+       
+        if (left&lt;m &amp;&amp; array[minIndex] &lt; array[left]) {
+</font>            minIndex = left;
+        }
+        if (right&lt;m &amp;&amp; array[minIndex] &lt; array[right]) {
+            minIndex = right;
+        }
+        if (minIndex != k) {
+            swap(k, minIndex);
+            sink(minIndex, m);
+        }
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
+    public static void largestElement(int [] num, int k){
+<a name="3"></a><font color="#00FFFF"><a href="match88-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+        MaxHeap heap = new MaxHeap (num.length);
+
+        for (int i = 0; i &lt; num.length; i++) {
+            heap.insert(num[i]);
+        }
+        int [] array = new int [k];
+        int indx = 0;
+</font>
+<a name="4"></a><font color="#FF00FF"><a href="match88-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+        while (heap.isEmpty != true &amp;&amp; indx &lt; k) {
+            array[indx] = heap.extractMax();
+            indx++;           
+        }
+        for (int i = 0; i &lt; array.length; i++) {
+            System.out.print(array[i] + " ");
+</font>        }
+    }
+<a name="7"></a><font color="#0000FF"><a href="match88-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+    public static void main (String[] args) {
+        int[] array = {4, 10, 2, 8, 6, 7};
+        int m = 3;
+        largestElement(array, m);
+</font>    } 
+}</pre>
+</body>
+</html>

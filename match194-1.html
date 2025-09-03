@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>A8_Sec26_24301347_MD-ASHIQUR-RAHMAN-ANKAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec18_24101192_Mohammad-Abrar-Kamal.txt<p></p><pre>
+Assignment 1:
+<a name="6"></a><font color="#00FF00"><a href="match194-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+class Minheap{
+    private int[] arr;
+    private int size;
+    public Minheap(int c){
+        arr = new int[c];
+        size = 0;
+    }
+    private void swap(int i, int j){
+</font><a name="7"></a><font color="#0000FF"><a href="match194-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+        int t = arr[i];
+        arr[i]=arr[j];
+        arr[j]= t;
+</font>    }
+    public void insert(int d){
+        arr[size]=d;
+        int ci = size;
+        int pi = (ci-1)/2;
+        swim(ci,pi);
+        size++;
+    }
+    private void swim(int ci, int pi){
+        while(ci&gt;0 &amp;&amp; arr[ci]&lt;arr[pi]){
+           swap(ci,pi);
+           ci = pi;
+           pi = (ci-1)/2;
+        }
+    }
+    public int extractMin(){
+        int d = arr[0];
+        swap(0,size-1);
+        size--;
+        sink(0,size);
+        return d;
+    }
+    private void sink(int i,int n){
+<a name="1"></a><font color="#00FF00"><a href="match194-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+        int l = 2*i+1;
+        int r = 2*i+2;
+        int mini = i;
+        if(l&lt;n &amp;&amp; arr[mini]&gt;arr[l]){
+            mini = l;
+        }if(r&lt;n &amp;&amp; arr[mini]&gt;arr[r]){
+            mini = r;
+        }if(mini!=i){
+            swap(i, mini);
+</font>            sink(mini, n);
+        }
+    }
+    public void heapsort(){
+        for(int i=size/2-1;i&gt;=0;i--){
+            sink(i, size);
+        }for(int i=size - 1; i&gt;=0;i--){
+            swap(0, i);
+            sink(0,i);
+        }
+    }
+    public int peek(){
+        return arr[0];
+    }
+    public boolean isEmpty(){
+<a name="5"></a><font color="#FF0000"><a href="match194-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+        return size==0;
+    }
+}
+
+public class task3 {
+    public static void main(String[] args){
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m = 4;
+</font>        Task03(tasks,m);
+
+    }
+<a name="4"></a><font color="#FF00FF"><a href="match194-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+    public static void Task03(int[] t, int m){
+        Minheap mh = new Minheap(m);
+        for(int i=0; i&lt;m; i++){
+            mh.insert(0);
+</font>        }
+        int index = 0;
+        while(!mh.isEmpty()){
+            int val = mh.extractMin();
+            mh.insert(val+t[index]);
+            index++;
+            if(index==t.length){
+                break;
+            }
+        }
+        while(!mh.isEmpty()){
+            System.out.println(mh.extractMin());
+        }
+    }
+}
+
+Assignment 2:
+class Maxheap{
+    private int[] arr;
+    private int size;
+    public Maxheap(int c){
+        arr = new int[c];
+        size = 0;
+    }
+<a name="8"></a><font color="#00FFFF"><a href="match194-0.html#8" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+    private void swap(int i, int j){
+        int t = arr[i];
+        arr[i]=arr[j];
+        arr[j]= t;
+</font>    }
+    public void insert(int d){
+        arr[size]=d;
+        int ci = size;
+        int pi = (ci-1)/2;
+        swim(ci,pi);
+        size++;
+    }
+    private void swim(int ci, int pi){
+        while(ci&gt;0 &amp;&amp; arr[ci]&gt;arr[pi]){
+           swap(ci,pi);
+           ci = pi;
+           pi = (ci-1)/2;
+        }
+    }
+    public int extractMax(){
+        int d = arr[0];
+        swap(0,size-1);
+        size--;
+        sink(0,size);
+        return d;
+    }
+    private void sink(int i,int n){
+<a name="0"></a><font color="#FF0000"><a href="match194-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+        int l = 2*i+1;
+        int r = 2*i+2;
+        int mini = i;
+        if(l&lt;n &amp;&amp; arr[mini]&lt;arr[l]){
+            mini = l;
+        }if(r&lt;n &amp;&amp; arr[mini]&lt;arr[r]){
+            mini = r;
+        }if(mini!=i){
+            swap(i, mini);
+            sink(mini, n);
+</font>        }
+    }
+    public void heapsort(){
+        for(int i=size/2-1;i&gt;=0;i--){
+            sink(i, size);
+        }for(int i=size - 1; i&gt;=0;i--){
+            swap(0, i);
+            sink(0,i);
+        }
+    }
+    public int peek(){
+        return arr[0];
+    }
+    public boolean isEmpty(){
+<a name="2"></a><font color="#0000FF"><a href="match194-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+        return size==0;
+    }
+}
+public class task4{
+    public static void main(String[] args){
+        int[] tasks = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+</font>        task4(tasks, k);
+        
+    }
+    public static void task4(int[] t, int k){
+<a name="3"></a><font color="#00FFFF"><a href="match194-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+        Maxheap mh = new Maxheap(t.length);
+        for(int i=0; i&lt;t.length; i++){
+            mh.insert(t[i]);
+        }
+        int[] arr = new int[k];
+</font>        int index = 0;
+        while(!mh.isEmpty() &amp;&amp; index&lt;k){
+            arr[index] = mh.extractMax();
+            index++;
+        }
+        for(int i=0;i&lt;arr.length;i++){
+            System.out.println(arr[i]+" ");
+        }
+    }
+}</pre>
+</body>
+</html>

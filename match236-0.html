@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>A8_Sec10_24101331_Sadman-Rahman-.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec10_24101331_Sadman-Rahman-.txt<p></p><pre>
+##Task - 3
+
+class MinHeap{
+    private int [] arr;
+    private int size;
+    private int cap;
+    MinHeap(int m){
+        arr = new int[m];
+        this.cap = m;
+        this.size = 0;
+    }
+
+    public void insert(int val){
+        if( this.size &gt;= cap){
+            System.out.println("this arr is full");
+            return;
+        }
+        this.arr[size] = val;
+
+        swim(this.size);
+        this.size = this.size+1;
+    }
+
+    public void swim( int idx ) {
+        int parentidx = (idx - 1) / 2;
+        if (idx == 0) {
+            return;
+        }
+<a name="5"></a><font color="#FF0000"><a href="match236-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+        if (arr[parentidx] &gt; arr[idx]) {
+            int temp = arr[parentidx];
+            arr[parentidx] = arr[idx];
+            arr[idx] = temp;
+</font>            swim(parentidx);
+        }
+    }
+
+        public int removemin(){
+            if( size &lt;=0 ){
+                System.out.println(" No elements to be removed");
+            }
+            int temp = arr[0];
+            arr[0] = arr[size-1];
+            arr[size-1] = 0;
+            size = size-1;
+            heapify(0);
+<a name="0"></a><font color="#FF0000"><a href="match236-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_8.gif"/></a>
+
+            return temp;
+        }
+
+        public void heapify( int idx ){
+        int left = 2*idx+1;
+        int right = 2*idx+2;
+        if( left&gt;= size ){
+            return ;
+        }
+
+        int smallest = left;
+        if( right&lt;size &amp;&amp; arr[smallest] &gt; arr[right]){
+            smallest = right;
+        }
+        if( arr[idx] &gt; arr[smallest]){
+            int temp = arr[idx];
+            arr[idx] = arr[smallest];
+            arr[smallest] = temp;
+</font>            heapify(smallest);
+        }
+    }
+    public int[] getHeapArray() {
+        int[] copy = new int[size];
+        for (int i = 0; i &lt; size; i++) {
+            copy[i] = arr[i];
+        }
+        return copy;
+    }
+
+<a name="2"></a><font color="#0000FF"><a href="match236-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+    static int[] assigned(int m, int[] task){
+        MinHeap h1 = new MinHeap(m);
+        for( int i=0; i&lt;m; i++){
+            h1.insert(0);
+        }
+       // int[] result = new int[m];
+        for( int i=0; i&lt; task.length; i++){
+            int temp = h1.removemin();
+</font>            int temp2 = temp+task[i];
+            h1.insert(temp2);
+
+        }
+        return h1.getHeapArray();
+
+    }
+}
+
+public class alfiMinHeap {
+    public static void main(String[] args) {
+
+        // MinHeap heap = new MinHeap(4);
+        int m = 4;
+        int[] tasks = {2, 4, 7, 1, 6};
+        int[] newt = MinHeap.assigned(4, tasks);
+        System.out.print("Final heap: ");
+        for (int i=0;i&lt; newt.length; i++) {
+            System.out.print(newt[i] + " ");
+
+        }
+    }
+}
+
+
+## Task - 4
+
+class maxHeap {
+    private int[] harr;
+    private int size;
+    private int cap;
+
+    maxHeap( int cap){
+        this.harr = new int[cap];
+        this.size = 0;
+        this.cap = cap;
+    }
+    public void insert(int val){
+        if( this.size &gt;= cap ){
+            System.out.println("this arr is full");
+            return;
+        }
+        this.harr[size] = val;
+        swim(this.size);
+        this.size = this.size+1;
+    }
+
+    public void swim( int idx ){
+        int parentidx = (idx-1)/2;
+        if( idx == 0 ){
+            return;
+        }
+<a name="4"></a><font color="#FF00FF"><a href="match236-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+        if( harr[parentidx] &lt; harr[idx] ){
+            int temp = harr[parentidx];
+            harr[parentidx] = harr[idx];
+            harr[idx] = temp;
+</font>            swim(parentidx);
+        }
+    }
+    public void printHeap(){
+        for( int i=0; i&lt;this.size; i++){
+            System.out.println(this.harr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public int removeMax() {
+        if (size &lt;= 0) {
+            System.out.println("No elements to remove");
+            return -1;
+        }
+        int temp = harr[0];
+        this.harr[0] = this.harr[size - 1];
+        this.harr[size - 1] = 0;
+        this.size = this.size - 1;
+        heapify(0);
+<a name="6"></a><font color="#00FF00"><a href="match236-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+        return temp;
+    }
+
+    public void heapify( int idx ){
+        int left = 2*idx+1;
+        int right = 2*idx+2;
+        if (left &gt;= size) {
+</font>            return;
+        }
+        int large = left;
+        if( right &lt; this.size &amp;&amp; harr[large]&lt;harr[right]){
+            large = right;
+        }
+        if(harr[idx] &lt; harr[large]){
+            int temp = harr[idx];
+            harr[idx] = harr[large];
+            harr[large] = temp;
+            heapify(large);
+        }
+    }
+
+         }
+
+class TopKElements {
+    public static int[] findtopk(int[] nums, int k) {
+<a name="1"></a><font color="#00FF00"><a href="match236-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_5.gif"/></a>
+
+        maxHeap heap = new maxHeap(nums.length);
+        for (int i = 0; i &lt; nums.length; i++) {
+            heap.insert(nums[i]);
+        }
+
+
+        int[] result = new int[k];
+        for (int i = 0; i &lt; k; i++) {
+</font><a name="3"></a><font color="#00FFFF"><a href="match236-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+            result[i] = heap.removeMax();
+
+        }
+        return result;
+
+    }
+}
+
+   public class alfiHeap {
+       public static void main(String[] args) {
+           int[] nums = {4,10,2,8,6,7};
+</font>           int k = 3;
+
+            int[] findk = TopKElements.findtopk(nums,k);
+            for( int i=0; i&lt;k; i++){
+                System.out.print(findk[i] + " ");
+            }
+
+
+       }
+   }</pre>
+</body>
+</html>

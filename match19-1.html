@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>A8_Sec18_24341068_Shadman-Ahmed-Khan---SHADMAN-AHMED-KHAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec21_24101546_Abdulla-Al-Fahad.txt<p></p><pre>
+﻿Task03
+import java.util.Arrays;
+
+
+public class Task03 {
+<a name="1"></a><font color="#00FF00"><a href="match19-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_44.gif"/></a>
+
+     static void buildMinHeap(int[] arr) {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i &gt;= 0; i--) {
+            sink(arr, n, i);
+        }
+    }
+
+
+     static void sink(int[] arr, int n, int i) {
+        int smallest = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        if (l &lt; n &amp;&amp; arr[l] &lt; arr[smallest]) smallest = l;
+        if (r &lt; n &amp;&amp; arr[r] &lt; arr[smallest]) smallest = r;
+        if (smallest != i) {
+            int tmp = arr[i];
+            arr[i] = arr[smallest];
+            arr[smallest] = tmp;
+            sink(arr, n, smallest);
+        }
+    }
+    static int[] machinary(int[] arr, int m) {
+        if (m &gt; arr.length) return null;
+        int[] newArr = new int[m];    
+        for (int i = 0; i &lt; m; i++) {
+            newArr[i] = arr[i];
+        }
+        buildMinHeap(newArr);
+        for (int i = m; i &lt; arr.length; i++) {
+            newArr[0] = newArr[0] + arr[i];
+            buildMinHeap(newArr);
+        }
+        return newArr;
+    }
+
+
+    public static void main(String[] args) {
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m = 4;
+        System.out.println(Arrays.toString(machinary(tasks, m)));
+    }
+}
+Task04
+</font>import java.util.Arrays;
+
+
+public class Task04Exact {
+<a name="0"></a><font color="#FF0000"><a href="match19-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_49.gif"/></a>
+
+    static class MaxHeap {
+       int[] heap;
+       int size;
+
+
+        public MaxHeap(int[] arr) {
+            this.heap = Arrays.copyOf(arr, arr.length);
+            this.size = arr.length;
+            buildMaxHeap();
+        }
+
+
+        private void buildMaxHeap() {
+            for (int i = size / 2 - 1; i &gt;= 0; i--) {
+                sink(i);
+            }
+        }
+
+
+        private void sink(int i) {
+            int largest = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+
+
+            if (left &lt; size &amp;&amp; heap[left] &gt; heap[largest]) largest = left;
+            if (right &lt; size &amp;&amp; heap[right] &gt; heap[largest]) largest = right;
+
+
+            if (largest != i) {
+                int temp = heap[i];
+                heap[i] = heap[largest];
+                heap[largest] = temp;
+                sink(largest);
+            }
+        }
+
+
+        public int extractMax() {
+            if (size &lt;= 0) throw new RuntimeException("Heap is empty");
+            int max = heap[0];
+            heap[0] = heap[size - 1];
+            size--;
+            sink(0);
+            return max;
+        }
+    }
+
+
+    public static int[] extraction(int[] arr, int k) {
+        if (k &gt; arr.length) return null;
+
+
+        MaxHeap maxHeap = new MaxHeap(arr);
+        int[] result = new int[k];
+
+
+        for (int i = 0; i &lt; k; i++) {
+            result[i] = maxHeap.extractMax();
+        }
+        return result;
+    }
+
+
+    public static void main(String[] args) {
+        int[] array = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+        int[] topK = extraction(array, k);
+        System.out.println(Arrays.toString(topK));  // Output: [10, 8, 7]
+</font>    }
+}</pre>
+</body>
+</html>

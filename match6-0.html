@@ -1,0 +1,242 @@
+<html>
+<head>
+<title>A8_Sec01_23101386_MINHAZUL-ABDIN-EMON.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec01_23101386_MINHAZUL-ABDIN-EMON.txt<p></p><pre>
+﻿Assignment Task3 :
+
+
+class MinHeap{
+<a name="2"></a><font color="#0000FF"><a href="match6-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_9.gif"/></a>
+
+    private int[] arr;
+    private int size;
+    public MinHeap(int n){
+        arr = new int[n];
+        size = 0;
+    }
+
+
+    private void increasecapacity(){
+        if (size == arr.length) {
+            int[] new_array = new int[arr.length +1];
+            System.arraycopy(arr, 0, new_array, 0, arr.length);
+            arr = new_array;
+        }
+    }
+    private void swap(int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+</font>        arr[j] = temp;
+    }
+    public boolean isEmpty() {
+        if(size == 0)return true;
+        else return false;
+    }
+<a name="0"></a><font color="#FF0000"><a href="match6-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_21.gif"/></a>
+
+    public void insert(int data) {
+        increasecapacity();
+        arr[size] = data;
+        int child = size;
+        int parent = (child-1)/2;
+        swim(child,parent);
+        size++;
+    }
+    private void swim(int child,int parent){
+        while (child &gt; 0 &amp;&amp; arr[child] &lt; arr[parent]) {
+            swap(child, parent);
+            child = parent;
+            parent = (child-1)/2;
+        }
+    }
+    public int peek() {
+        return arr[0];
+    }
+    private void sink(int i, int n) {
+        int left = (2*i)+1;
+        int right = (2*i)+2;
+        int lowest = i;
+
+
+        if (left &lt; n &amp;&amp; arr[lowest] &gt; arr[left]) {
+            lowest = left;
+        }
+        if (right &lt; n &amp;&amp; arr[lowest] &gt; arr[right]) {
+            lowest = right;
+        }
+        if (lowest != i) {
+            swap(i, lowest);
+            sink(lowest, n);
+        }
+    }
+    public int extractMin() {
+        int data = arr[0];
+        swap(0, size - 1);
+        size--;
+        sink(0, size);
+        return data;
+    }
+   
+}
+
+
+public class Task3{
+</font><a name="1"></a><font color="#00FF00"><a href="match6-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_13.gif"/></a>
+
+    public static void main(String[] args) {
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m=4;
+        Task3(tasks,m);
+    }
+    public static void Task3(int[] tasks,int m){
+        MinHeap heap = new MinHeap(m);
+        for(int i=0;i&lt;m;i++){
+            heap.insert(0);
+        }
+        int index=0;
+        while(!heap.isEmpty()){
+            int val = heap.extractMin();
+            heap.insert(val+tasks[index]);
+            index++;
+            if(index==tasks.length){
+                break;
+            }
+        }
+        while(!heap.isEmpty()){
+            System.out.print(heap.extractMin()+" ");
+</font>        }
+    }
+}
+
+
+
+
+
+
+
+
+Assignment Task 4:
+
+
+class MaxHeap {
+<a name="3"></a><font color="#00FFFF"><a href="match6-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_9.gif"/></a>
+
+    private int[] arr;
+    private int size;
+
+
+    public MaxHeap(int n) {
+        arr = new int[n];
+        size = 0;
+    }
+
+
+    private void increaseCapacity() {
+        if (size == arr.length) {
+            int[] newArray = new int[arr.length + 1];
+            System.arraycopy(arr, 0, newArray, 0, arr.length);
+            arr = newArray;
+        }
+    }
+
+
+    private void swap(int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+</font>        arr[j] = temp;
+    }
+
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+
+<a name="8"></a><font color="#00FFFF"><a href="match6-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+    public void insert(int data) {
+        increaseCapacity();
+        arr[size] = data;
+        int childIndex = size;
+        int parentIndex = (childIndex - 1) / 2;
+        swim(childIndex, parentIndex);
+</font>        size++;
+    }
+
+
+    private void swim(int childIndex, int parentIndex) {
+        while (childIndex &gt; 0 &amp;&amp; arr[childIndex] &gt; arr[parentIndex]) {
+            swap(childIndex, parentIndex);
+            childIndex = parentIndex;
+<a name="7"></a><font color="#0000FF"><a href="match6-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+            parentIndex = (childIndex - 1) / 2;
+        }
+    }
+
+
+    private void sink(int i, int n) {
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        int maxIndex = i;
+
+
+        if (left &lt; n &amp;&amp; arr[maxIndex] &lt; arr[left]) {
+</font>            maxIndex = left;
+        }
+        if (right &lt; n &amp;&amp; arr[maxIndex] &lt; arr[right]) {
+<a name="5"></a><font color="#FF0000"><a href="match6-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_5.gif"/></a>
+
+            maxIndex = right;
+        }
+        if (maxIndex != i) {
+            swap(i, maxIndex);
+            sink(maxIndex, n);
+        }
+    }
+
+
+    public int extractMax() {
+        int data = arr[0];
+        swap(0, size - 1);
+        size--;
+        sink(0, size);
+        return data;
+    }
+
+
+   
+}
+public class Task4 {
+</font><a name="6"></a><font color="#00FF00"><a href="match6-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_4.gif"/></a>
+
+    public static void main(String[] args) {
+        int[] arr = {4, 10, 2, 8, 6, 7};
+        int k=3;
+        TopK(arr,k);
+    }
+    public static void TopK(int[] nums , int k){
+</font><a name="4"></a><font color="#FF00FF"><a href="match6-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_8.gif"/></a>
+
+        MaxHeap h = new MaxHeap(nums.length);
+        for(int i=0;i&lt;nums.length;i++){
+            h.insert(nums[i]);
+        }
+        int[] arr = new int[k];
+        int index=0;
+        while (!h.isEmpty() &amp;&amp; index &lt; k) {
+            arr[index] = h.extractMax();
+            index++;
+        }
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i] + " ");
+</font>        }
+    }
+
+
+}</pre>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<html>
+<head>
+<title>A8_Sec26_24301347_MD-ASHIQUR-RAHMAN-ANKAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec06_24341003_Fouzia-Hossain.txt<p></p><pre>
+Assignment 08___
+1))// TaskScheduler.java
+public class TaskScheduler{
+<a name="2"></a><font color="#0000FF"><a href="match200-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+  public static int[] assignTasks(int[] tasks, int machineCount){
+        MinHeap heap = new MinHeap(machineCount); 
+                                                                   //Initialize machines with 0 load
+        for (int i = 0; i &lt; machineCount; i++){ 
+          heap.insert(0);
+</font>        }
+        for (int task : tasks){
+            int leastLoad = heap.removeMin();     //pick machine with smallest load
+            leastLoad += task;                
+            heap.insert(leastLoad);               //put updated load back
+        }
+      return heap.getHeap(); // final machine
+    }
+
+ // Driver code
+<a name="5"></a><font color="#FF0000"><a href="match200-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+    public static void main(String[] args){
+        int[] tasks ={2, 4, 7, 1, 6};
+        int machines = 4;
+      int[] finalLoads = assignTasks(tasks, machines);
+</font>
+        System.out.print("Final machine loads: ");
+        for (int load : finalLoads) System.out.print(load+" ");
+    }
+}
+ // MinHeap.java
+public class MinHeap {
+    private int[] heap;  
+    private int size;   
+// Constructor: create empty heap for given capacity
+  public MinHeap(int capacity) {
+     heap = new int[capacity + 1]; 
+       size = 0;
+    }
+
+    public void insert(int load) {
+        size++;
+        heap[size] = load;
+        swim(size);  //fix heap upwards
+    }
+
+    public int removeMin() {
+        int smallest = heap[1];
+        heap[1] = heap[size];
+        size--;
+        sink(1);     //fix heap downwards
+        return smallest;
+    }
+
+   private void swim(int index) {   //Move up to maintain min-heap
+        while (index &gt; 1) {
+<a name="3"></a><font color="#00FFFF"><a href="match200-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+            int parent = index / 2;
+            if (heap[index] &lt; heap[parent]) {
+                swap(index, parent);
+                index = parent;
+            } else break;
+        }
+    }
+
+    private void sink(int index) {  // Move down to maintain min-heap
+        while (true) {
+</font>            int left = 2 * index;
+            int right = 2 * index + 1;
+            int smallest = index;
+
+            if (left &lt;= size &amp;&amp; heap[left] &lt; heap[smallest]) smallest = left;
+<a name="0"></a><font color="#FF0000"><a href="match200-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_10.gif"/></a>
+
+            if (right &lt;= size &amp;&amp; heap[right] &lt; heap[smallest]) smallest = right;
+
+            if (smallest != index) {
+                swap(index, smallest);
+                index = smallest;
+            } else break;
+        }
+    }
+
+    private void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+
+    public int[] getHeap() {
+        int[] result = new int[size];
+        for (int i = 1; i &lt;= size; i++) result[i - 1] = heap[i];
+</font>        return result;
+    }
+}
+
+
+
+2))// TopKElements.java
+public class TopKElements{
+ public static int[] topKLargest(int[] nums, int k) {
+     MaxHeap heap = new MaxHeap(nums.length);
+<a name="6"></a><font color="#00FF00"><a href="match200-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+       for (int num : nums) heap.insert(num);
+
+        int[] result = new int[k];
+      for (int i = 0; i &lt; k; i++) {
+            result[i] = heap.removeMax();
+</font>        }
+        return result;
+    }
+
+ // Driver code 
+<a name="4"></a><font color="#FF00FF"><a href="match200-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+    public static void main(String[] args) {
+        int[] nums = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+
+        int[] topK = topKLargest(nums, k);
+</font>
+        System.out.print("Top "+k+" largest numbers ");
+        for (int val : topK) System.out.print(val + " ");
+    }
+}
+
+
+
+// MaxHeap.java
+public class MaxHeap{
+    private int[] heap; 
+    private int size;   
+
+// Create empty heap
+    public MaxHeap(int capacity){
+        heap = new int[capacity + 1]; 
+        size = 0;
+    }
+
+   public void insert(int number) {
+       size++;
+       heap[size] = number;  
+       swim(size);          
+    }
+
+    public int removeMax() {
+        int largest = heap[1];      // root
+        heap[1] = heap[size];       // move last element to root
+        size--;
+        sink(1);                    // move down to fix heap
+        return largest;
+    }
+
+    private void swim(int index) {  // Move element up to maintain maxheap 
+        while (index &gt; 1) {
+           int parent = index /2;
+<a name="7"></a><font color="#0000FF"><a href="match200-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+            if (heap[index] &gt; heap[parent]) {
+                swap(index, parent);
+                index = parent;
+            } else break;       //parent bigger → stop
+        }
+    }
+
+  private void sink(int index) {
+</font>        while (true) {
+            int left = 2 * index;
+            int right = 2 * index + 1;
+            int largest = index;
+
+            if (left &lt;= size &amp;&amp; heap[left] &gt; heap[largest]) largest = left;
+<a name="1"></a><font color="#00FF00"><a href="match200-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+            if (right &lt;= size &amp;&amp; heap[right] &gt; heap[largest]) largest = right;
+
+            if (largest != index) {
+                swap(index, largest);
+                index = largest;
+            } else break;
+        }
+    }
+
+     private void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+</font>    }
+}
+
+
+</pre>
+</body>
+</html>

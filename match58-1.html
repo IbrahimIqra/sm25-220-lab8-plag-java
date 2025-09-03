@@ -1,0 +1,303 @@
+<html>
+<head>
+<title>A8_Sec18_24101594_Tasriful-Nabil---TASRIFUL-NABIL.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec04_24301588_SANI-MUNIR-MANNAN-MUNTAZAR.txt<p></p><pre>
+import java.util.Arrays;
+public class Lab8Task3{
+  public static void main(String[] args){
+    int [] tasks={2, 4, 7, 1 ,6};
+    int m=4;
+    int [] a1= sortArray(tasks, m);
+<a name="6"></a><font color="#00FF00"><a href="match58-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+    System.out.println(Arrays.toString(a1));
+  }
+  
+  public static int[] sortArray(int [] a1, int m){
+  Minheap heap= new Minheap(m);
+  for(int i=0; i&lt;m; i++){
+    heap.insert(0);
+</font>  }
+  
+    for(int o:a1){
+    int load= heap.minExtract();
+    heap.insert(load+o);
+    }
+    return heap.toArrays();
+  }
+    
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+import java.util.Arrays;
+public class Lab8Task4{
+  public static void main(String[] args){
+    int [] arr1={4, 10, 2, 8, 6, 7};
+    int  k=3;
+    int[] arr2= topKlarge(arr1, k);
+<a name="11"></a><font color="#00FF00"><a href="match58-0.html#11" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_1.gif"/></a>
+
+    System.out.println(Arrays.toString(arr2));
+  }
+  
+  public static int[] topKlarge(int [] arr1, int k){
+  Maxheap heap= new Maxheap(arr1.length);
+    for(int b: arr1){
+</font>    heap.insert(b);
+    }
+    int[] arr2= new int[k];
+<a name="9"></a><font color="#FF00FF"><a href="match58-0.html#9" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_1.gif"/></a>
+
+    for(int i=0; i&lt;k; i++){
+    arr2[i]= heap.maxExtract();
+    }
+    return arr2;
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+public class Maxheap{
+</font><a name="0"></a><font color="#FF0000"><a href="match58-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+  private int[] heap;
+  private int size;
+  
+  
+  public Maxheap(int cap){
+    heap= new int[cap];
+    size=0;
+    
+  }
+  public void insert(int val){
+    if(size==heap.length){
+      System.out.println("Heap reached full capacity");
+</font>      
+    }
+    heap[size]=val;
+    swim(size);
+    size++;
+    
+  }
+  
+<a name="5"></a><font color="#FF0000"><a href="match58-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+  private void swim(int n){
+    while(n&gt;0){
+      int parent=(n-1)/2;
+      if(heap[parent]&lt;heap[n]){
+        swap(parent, n);
+        n=parent;
+      }else{
+        break;
+      }
+    }
+  }
+  
+  public int maxExtract(){
+</font>    if(size==0){
+      System.out.println("Empty Heap, add more elements");
+    }
+<a name="7"></a><font color="#0000FF"><a href="match58-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+    int max=heap[0];
+    heap[0]= heap[size-1];
+    size--;
+    sink(0);
+    return max;
+</font><a name="1"></a><font color="#00FF00"><a href="match58-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+    
+  }
+  
+  public int[] toArrays(){
+    int[] arr1= new int[size];
+    for(int n=0; n&lt;size; n++){
+      arr1[n]=heap[n];
+    }
+      return arr1;
+</font>    
+  }
+  private void sink(int i){
+    while(2*i+1&lt;size){
+      int j= 2*1+1;
+      if(j+1&lt;size &amp;&amp; heap[j+1]&gt;heap[i]){
+        j++;
+      }
+      if(heap[i]&gt;= heap[j]){
+        break;
+      }
+      swap(i,j);
+      i=j;
+      
+    }
+  }
+  
+  private void swap(int i, int j){
+    int temp= heap[i];
+    heap[i]=heap[j];
+    heap[j]=temp;
+  }
+  
+  private void sortArray(){
+    int[] temp= new int[size];
+    for(int i=0; i&lt;size; i++){
+      temp[i]= heap[i];
+    }
+    
+    int len= temp.length;
+    for(int k=(len/2)-1; k&gt;=0; k--){
+      sink(temp, k, len);
+    }
+    for(int f=len-1; f&gt;0; f--){
+      int swap= temp[0];
+      temp[0]=temp[f];
+      temp[f]=swap;
+      sink(temp, 0, f);
+    }
+    System.out.print("Sorted: ");
+    for(int val: temp){
+    System.out.print(val+ " ");
+    }
+    System.out.println();
+  }
+    
+  private void sink(int[] a, int o, int len){
+    while(2*o+1&lt;len){
+    int n= 2*o+1;
+    if(n+1&lt;len &amp;&amp; a[n+1]&gt; a[n]){
+    n++;
+    }
+    if(a[o]&gt;= a[n]){
+    break;
+    }
+    int temp= a[o];
+    a[o]=a[n];
+    a[n]=temp;
+    o=n;
+    }
+  }
+  
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+<a name="2"></a><font color="#0000FF"><a href="match58-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+public class Minheap{
+  private int[] heap;
+  private int size;
+  
+  public Minheap(int cap){
+    heap= new int[size];
+    size=0;
+  }
+  public void insert(int val){
+    if(size== heap.length){
+      System.out.println("Heap is full, no elements added");
+</font>    }
+    heap[size]= val;
+    swim(size);
+    size++;
+  }
+<a name="10"></a><font color="#FF0000"><a href="match58-0.html#10" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_1.gif"/></a>
+
+  private void swap(int i, int j){
+    int temp=heap[i];
+    heap[i]=heap[j];
+    heap[j]=temp;
+</font>    
+  }
+<a name="4"></a><font color="#FF00FF"><a href="match58-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+  private void swim(int i){
+    while(i&gt;0){
+      int parent=(i-1)/2;
+      if(heap[parent]&gt;heap[i]){
+        swap(parent, i);
+        i=parent;
+      }else{
+        break;
+      }
+    }
+  }
+  public int minExtract(){
+</font>    if(size==0){
+    System.out.println("Empty heap");
+    }
+<a name="8"></a><font color="#00FFFF"><a href="match58-0.html#8" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+    int min= heap[0];
+    heap[0]=heap[size-1];
+    size--;
+    sink(0);
+    return min;
+</font>  }
+  private void sortArray(){
+    int [] temp= new int[size];
+    for(int i=0; i&lt;size; i++){
+      temp[i]=heap[i];
+    }
+    int len= heap.length;
+    for(int m=(len/2)-1; m&gt;=0; m--){
+      sink(temp, m, len);
+      
+    }
+    for(int i=len-1; i&gt;0; i--){
+      int swap= temp[0];
+      temp[0]=temp[i];
+      temp[i]=swap;
+      sink(temp,0,i);
+    }
+    System.out.print("Sorted: ");
+    for(int val: temp){
+      System.out.println(val + " ");
+    }
+<a name="3"></a><font color="#00FFFF"><a href="match58-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+    System.out.println();
+    
+  }
+  
+  public int[] toArrays(){
+    int[] a1= new int[size];
+    for(int i=0; i&lt;size; i++){
+      a1[i]=heap[i];
+    }
+      return a1;
+</font>    
+  }
+  private void sink(int i){
+    while(2*i+1&lt;size){
+    int j= 2*1+1;
+    if(j+1&lt;size &amp;&amp; heap[j+1]&gt;heap[j]){
+    j++;
+    }
+    if(heap[i]&gt;=heap[j]){
+    break;
+    }
+    swap(i,j);
+    }
+  }
+  private void sink(int[] arr, int i, int len){
+    while(2*i+1&lt;len){
+      int j=2*i+1;
+      if(j+1&lt;len &amp;&amp; arr[j+1]&lt;arr[j]){
+        j++;
+      }
+      if(arr[i]&lt;=arr[j]){
+        break;
+      }
+      int temp= arr[i];
+      arr[i]=arr[j];
+      i=j;
+    }
+  }
+}</pre>
+</body>
+</html>

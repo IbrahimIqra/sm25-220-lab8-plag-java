@@ -1,0 +1,251 @@
+<html>
+<head>
+<title>A8_Sec10_24101084_Ramisa-Faria.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec10_24101084_Ramisa-Faria.txt<p></p><pre>
+~~~~TASK 03:
+
+class MinHeapT_3{
+<a name="0"></a><font color="#FF0000"><a href="match49-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_12.gif"/></a>
+
+    private int[] arr;
+    private int size;
+    public MinHeapT_3(int capa){
+        arr = new int[capa];
+        size = 0;
+    }
+
+    private void increasecapacity(){
+        if (size == arr.length) {
+            int[] new_array = new int[arr.length +1];
+            System.arraycopy(arr, 0, new_array, 0, arr.length);
+            arr = new_array;
+        }
+    }
+    private void swapp(int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    public void insertt(int data) {
+        increasecapacity();
+        arr[size] = data;
+        int childIndex = size;
+        int parentIndex = (childIndex - 1) / 2;
+</font>        swimm(childIndex, parentIndex);
+        size++;
+    }
+    private void swimm(int childIndex,int parentIndex){
+        while (childIndex &gt; 0 &amp;&amp; arr[childIndex] &lt; arr[parentIndex]) {
+            swapp(childIndex, parentIndex);
+            childIndex = parentIndex;
+            parentIndex = (childIndex - 1) / 2;
+        }
+    }
+    public int peek() {
+<a name="5"></a><font color="#FF0000"><a href="match49-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+        return arr[0];
+    }
+    private void sink(int i, int n) {
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        int minIndex = i;
+</font>
+        if (left &lt; n &amp;&amp; arr[minIndex] &gt; arr[left]) {
+            minIndex = left;
+        }
+        if (right &lt; n &amp;&amp; arr[minIndex] &gt; arr[right]) {
+<a name="3"></a><font color="#00FFFF"><a href="match49-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+            minIndex = right;
+        }
+        if (minIndex != i) {
+            swapp(i, minIndex);
+            sink(minIndex, n);
+        }
+    }
+    public int extractMin() {
+        int data = arr[0];
+        swapp(0, size - 1);
+        size--;
+        sink(0, size);
+        return data;
+    }
+    public void heapsorting() {
+</font>        for (int i = size / 2 - 1; i &gt;= 0; i--) {
+            sink(i, size);
+        }
+        for (int i = size - 1; i &gt; 0; i--) {
+            swapp(0, i);
+            sink(0, i);
+        }
+    }
+    public void printSorted() {
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+public class practiceMeanHeap {
+<a name="7"></a><font color="#0000FF"><a href="match49-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+    public static void main(String[] args) {
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m=4;
+        Task03(tasks,m);
+</font>    }
+    public static void Task03(int[] tasks,int m){
+        MinHeapT_3 h = new MinHeapT_3(m);
+        for(int i=0;i&lt;m;i++){
+            h.insertt(0);
+        }
+        int index=0;
+        while(!h.isEmpty()){
+            int val = h.extractMin();
+            h.insertt(val+tasks[index]);
+            index++;
+            if(index==tasks.length){
+                break;
+            }
+        }
+        while(!h.isEmpty()){
+            System.out.print(h.extractMin() + " ");
+        }
+        
+    }
+}  
+
+
+
+
+~~~TASK 04:
+
+
+class MaxHeapT_04 {
+    private int[] arr;
+    private int size;
+
+    public MaxHeapT_04(int capacity) {
+        arr = new int[capacity];
+        size = 0;
+    }
+
+    private void incrCapacity() {
+        if (size == arr.length) {
+            int[] newArray = new int[arr.length + 1];
+            System.arraycopy(arr, 0, newArray, 0, arr.length);
+            arr = newArray;
+        }
+    }
+
+    private void swapp(int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public boolean isEmptyy() {
+        return size == 0;
+    }
+
+    public void insertt(int data) {
+        incrCapacity();
+        arr[size] = data;
+        int childIndex = size;
+        int parentIndex = (childIndex - 1) / 2;
+        swimm(childIndex, parentIndex);
+        size++;
+    }
+
+    private void swimm(int childIndex, int parentIndex) {
+<a name="6"></a><font color="#00FF00"><a href="match49-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+        while (childIndex &gt; 0 &amp;&amp; arr[childIndex] &gt; arr[parentIndex]) {
+            swapp(childIndex, parentIndex);
+            childIndex = parentIndex;
+            parentIndex = (childIndex - 1) / 2;
+</font>        }
+    }
+
+    public int peek() {
+        return arr[0];
+    }
+
+    private void sinkk(int i, int n) {
+<a name="2"></a><font color="#0000FF"><a href="match49-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_5.gif"/></a>
+
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        int maxIndex = i;
+
+        if (left &lt; n &amp;&amp; arr[maxIndex] &lt; arr[left]) {
+            maxIndex = left;
+        }
+        if (right &lt; n &amp;&amp; arr[maxIndex] &lt; arr[right]) {
+            maxIndex = right;
+        }
+        if (maxIndex != i) {
+</font>            swapp(i, maxIndex);
+            sinkk(maxIndex, n);
+        }
+    }
+
+    public int extractMax() {
+        int data = arr[0];
+        swapp(0, size - 1);
+        size--;
+        sinkk(0, size);
+        return data;
+    }
+
+    public void heapSort() {
+        for (int i = size / 2 - 1; i &gt;= 0; i--) {
+            sinkk(i, size);
+        }
+        for (int i = size - 1; i &gt; 0; i--) {
+            swapp(0, i);
+            sinkk(0, i);
+        }
+    }
+
+    public void printSort() {
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+public class practMeanHeap {
+<a name="4"></a><font color="#FF00FF"><a href="match49-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+    public static void main(String[] args) {
+        int[] tasks = {4, 10, 2, 8, 6, 7};
+        int k=3;
+        TopKLargestElement(tasks,k);
+    }
+    public static void TopKLargestElement(int[] nums , int k){
+</font><a name="1"></a><font color="#00FF00"><a href="match49-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_7.gif"/></a>
+
+        MaxHeapT_04 h = new MaxHeapT_04(0);
+        for(int i=0;i&lt;nums.length;i++){
+            h.insertt(nums[i]);
+        }
+        int[] arr = new int[k];
+        int index=0;
+        while (!h.isEmptyy() &amp;&amp; index &lt; k) {
+            arr[index] = h.extractMax();
+            index++;
+        }
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i] + " ");
+</font>        }
+    }
+
+}</pre>
+</body>
+</html>

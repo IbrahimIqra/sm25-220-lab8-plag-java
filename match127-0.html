@@ -1,0 +1,353 @@
+<html>
+<head>
+<title>A8_Sec22_23141002_Arif-Raihan-Mahee.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec22_23141002_Arif-Raihan-Mahee.txt<p></p><pre>
+Assignment Task 3:
+
+import java.util.Arrays;
+<a name="3"></a><font color="#00FFFF"><a href="match127-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+public class Task3 {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public Task3(int capacity) {
+        this.capacity = capacity;
+        heap = new int[capacity];
+        size = 0;
+    }
+
+    // Insert into Min Heap
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = value;
+        swim(size);
+        size++;
+</font>    }
+
+    // Swim up to maintain heap property
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &lt; heap[parent(index)]) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+    }
+
+    private int parent(int index) {
+        return (index - 1) / 2;
+    }
+
+    // Delete the min (root) element
+    public int deleteMin() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int min = heap[0];
+<a name="1"></a><font color="#00FF00"><a href="match127-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_5.gif"/></a>
+
+        swap(0, size - 1);
+        size--;
+        heapify(0);
+        return min;
+    }
+
+    // Heapify down to maintain heap property
+    private void heapify(int index) {
+        int smallest = index;
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        if (left &lt; size &amp;&amp; heap[left] &lt; heap[smallest])
+            smallest = left;
+        if (right &lt; size &amp;&amp; heap[right] &lt; heap[smallest])
+            smallest = right;
+
+        if (smallest != index) {
+            swap(index, smallest);
+            heapify(smallest);
+</font>        }
+    }
+
+    // Swap helper
+    private void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+
+    // Heap sort (in-place, ascending order)
+    public void heapSort() {
+        int originalSize = size;
+        for (int i = size - 1; i &gt; 0; i--) {
+            swap(0, i);
+            size--;
+            heapify(0);
+        }
+        size = originalSize;
+    }
+
+    // Display heap
+    public void printHeap() {
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+    // Sorted heap
+    public static int[] getSortedHeap(int [] heap) {
+        int size = heap.length;
+        int [] tmp = new int[size];
+        for (int i = size-1,j=0; i &gt;= 0; i--,j++) {
+            tmp[j] = heap[i];
+        }
+        return tmp;
+    }
+
+    // Display array after sorting
+    public void printSorted() {
+        // heapSort();
+        for (int i = size-1; i &gt;= 0; i--) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        taskPrint("\n==================== TASK#3 =====================");
+        
+        System.out.println("----------------------Test1----------------------");
+        System.out.println("::Given inputs::");
+        System.out.println("::tasks = [2, 4, 7, 1, 6]::");
+        System.out.println("::m = 4::");
+
+        int m =4;
+        int [] task = {2, 4, 7, 1, 6};
+        Task3 minHeap = new Task3(m);
+        for(int i=0;i&lt;m;i++){
+            minHeap.insert(0);
+        }
+        System.out.println("\n::Initial Machine Processed times::");
+        System.out.print("::Min-Heap: ");
+        minHeap.printHeap();
+        for(int i=0;i&lt;task.length;i++){
+            System.out.println("\n::Clearing "+(i+1)+"th Task, Processing time: "+task[i]+"::");
+            int tmp = minHeap.deleteMin();
+            tmp+= task[i];
+            minHeap.insert(tmp);
+            if(i==task.length-1){
+                int [] exp = {2, 4, 7, 7}, out;
+                minHeap.heapSort();
+                out = getSortedHeap(minHeap.heap);
+                System.out.println("\n::Expected Output::");
+                for(int j=0;j&lt;exp.length;j++){
+                    System.out.print(""+exp[j]+" ");
+                }
+                System.out.println(bold+"\n::Your Output::");
+                minHeap.printSorted();
+                System.out.print(normal);
+                if( out!=null &amp;&amp; Arrays.equals( exp, out ) ) successPrint("Task#3 Test1");
+                else failedPrint("Task#3 Test1");
+                break;
+            }
+            // System.out.println("\n::Currently Machine Processed times::");
+            // System.out.print("::Min-Heap: ");
+            // minHeap.printHeap();
+        }
+    }
+        
+    // DO NOT TOUCH ANY OF THE CODES BELOW
+    // IT's ONLY FOR COLOR PRINTING SUCCESS AND FAILURE
+    static final String green = "\u001B[32m", red = "\u001B[31m", white = "\u001B[37m", cyan = "\033[0;96m";
+    static final String bold="\u001B[1m", underline = "\u001B[4m", normal = "\033[0;0m";
+    
+    static String taskFormat = cyan;
+    static String sucsFormat = "\n"+green+bold+underline;
+    static String failFormat = "\n"+red+bold+underline;
+    static String endFormat = normal+white;
+
+    private static void taskPrint(String task){
+        System.out.println(taskFormat+task+endFormat);
+    }
+
+    private static void successPrint(String task){
+        System.out.println(sucsFormat+"    "+task+" Success!! Output Matched!!!     "+endFormat);
+    }
+    
+    private static void failedPrint(String task){
+        System.out.println(failFormat+"    "+task+" Failed!! Output didn't Match!!!   "+endFormat);
+    }
+}
+
+
+Assignment Task 4:
+
+import java.util.Arrays;
+<a name="0"></a><font color="#FF0000"><a href="match127-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+public class Task4 {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public Task4(int capacity) {
+        this.capacity = capacity;
+        heap = new int[capacity];
+        size = 0;
+    }
+
+    // Insert into Max Heap
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = value;
+        swim(size);
+        size++;
+    }
+
+    // Swim up to maintain heap property
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &gt; heap[parent(index)]) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+    }
+
+    private int parent(int index) {
+        return (index - 1) / 2;
+</font>    }
+
+    // Delete the max (root) element
+    public int deleteMax() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int max = heap[0];
+        swap(0, size - 1);
+        size--;
+        heapify(0);
+        return max;
+    }
+
+    // Heapify down to maintain heap property
+<a name="2"></a><font color="#0000FF"><a href="match127-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+    private void heapify(int index) {
+        int largest = index;
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        if (left &lt; size &amp;&amp; heap[left] &gt; heap[largest])
+            largest = left;
+        if (right &lt; size &amp;&amp; heap[right] &gt; heap[largest])
+            largest = right;
+
+        if (largest != index) {
+            swap(index, largest);
+            heapify(largest);
+        }
+    }
+
+    // Swap helper
+    private void swap(int i, int j) {
+</font>        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+
+    // Heap sort (in-place)
+    public void heapSort() {
+        int originalSize = size;
+        for (int i = size - 1; i &gt; 0; i--) {
+            swap(0, i);
+            size--;
+            heapify(0);
+        }
+        size = originalSize;
+    }
+
+    // Display heap
+    public void printHeap() {
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // Display array after sorting
+    public void printSorted() {
+        heapSort();
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        taskPrint("\n==================== TASK#4 =====================");
+        
+        System.out.println("----------------------Test1----------------------");
+        System.out.println("::Given inputs::");
+        System.out.println("::nums = [4, 10, 2, 8, 6, 7]::");
+        System.out.println("::k = 3::");
+
+        int [] nums = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+        Task4 maxHeap = new Task4(nums.length);
+        for(int i=0;i&lt;nums.length;i++){
+            maxHeap.insert(nums[i]);
+        }
+        int [] out = new int[k];
+        for(int i=0;i&lt;out.length;i++){
+            int tmp = maxHeap.deleteMax();
+            out[i] = tmp;
+        }
+        int [] exp = {10, 8, 7};
+        System.out.println("\n::Expected Output::");
+        for(int j=0;j&lt;exp.length;j++){
+            System.out.print(""+exp[j]+" ");
+        }
+        System.out.println(bold+"\n::Your Output::");
+        for(int i=0;i&lt;out.length;i++){
+            System.out.print(""+out[i]+" ");
+        }
+        System.out.print(normal);
+        if( out!=null &amp;&amp; Arrays.equals( exp, out ) ) successPrint("Task#3 Test1");
+        else failedPrint("Task#3 Test1");
+    }
+        
+    // DO NOT TOUCH ANY OF THE CODES BELOW
+    // IT's ONLY FOR COLOR PRINTING SUCCESS AND FAILURE
+    static final String green = "\u001B[32m", red = "\u001B[31m", white = "\u001B[37m", cyan = "\033[0;96m";
+    static final String bold="\u001B[1m", underline = "\u001B[4m", normal = "\033[0;0m";
+    
+    static String taskFormat = cyan;
+    static String sucsFormat = "\n"+green+bold+underline;
+    static String failFormat = "\n"+red+bold+underline;
+    static String endFormat = normal+white;
+
+    private static void taskPrint(String task){
+        System.out.println(taskFormat+task+endFormat);
+    }
+
+    private static void successPrint(String task){
+        System.out.println(sucsFormat+"    "+task+" Success!! Output Matched!!!     "+endFormat);
+    }
+    
+    private static void failedPrint(String task){
+        System.out.println(failFormat+"    "+task+" Failed!! Output didn't Match!!!   "+endFormat);
+    }
+}
+</pre>
+</body>
+</html>

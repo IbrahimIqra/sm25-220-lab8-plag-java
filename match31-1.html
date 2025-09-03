@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>A8_Sec22_23141002_Arif-Raihan-Mahee.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec18_24141048_Md-Ruzlan-Ismail.txt<p></p><pre>
+// TASK 3
+<a name="0"></a><font color="#FF0000"><a href="match31-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_27.gif"/></a>
+
+import java.util.Scanner;
+public class Main {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public Main(int capacity) {
+        this.capacity = capacity;
+        heap = new int[capacity];
+        size = 0;
+    }
+    
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = value;
+        swim(size);
+        size++;
+    }
+
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &lt; heap[parent(index)]) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+    }
+
+    private int parent(int index) {
+        return (index - 1) / 2;
+    }
+
+    public int deleteMin() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int min = heap[0];
+        swap(0, size - 1);
+        size--;
+        heapify(0);
+        return min;
+    }
+
+    private void heapify(int index) {
+        int smallest = index; 
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+    
+        if (left &lt; size &amp;&amp; heap[left] &lt; heap[smallest])  
+            smallest = left;
+        if (right &lt; size &amp;&amp; heap[right] &lt; heap[smallest]) 
+            smallest = right;
+    
+        if (smallest != index) {
+            swap(index, smallest);
+            heapify(smallest);
+        }
+    }
+
+
+    private void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+</font>        heap[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int tasks[] = {2, 4, 7, 1, 6};
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter m: ");
+        int m = sc.nextInt();
+        Main minHeap = new Main(m);
+        for(int i = 0; i &lt; m; i++){
+            minHeap.insert(0);
+        }
+        int x[] = process(minHeap, tasks, m);
+        for(int i = 0; i &lt; x.length; i++){
+            System.out.print(x[i] + " ");
+        }
+    }
+    public static int[] process(Main MinHeap, int[] tasks, int m){
+        for(int i = 0; i &lt; tasks.length; i++){
+            int ft = tasks[i];
+            int dmin = MinHeap.deleteMin();
+            MinHeap.insert(ft+dmin);
+        }
+        int arr[] = new int[m];
+        for(int i = 0; i &lt; m; i++){
+            arr[i] = MinHeap.deleteMin();
+        }
+        return arr;
+    }
+}
+
+//TASK 4
+<a name="1"></a><font color="#00FF00"><a href="match31-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_27.gif"/></a>
+
+import java.util.Scanner;
+public class Main {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public Main(int capacity) {
+        this.capacity = capacity;
+        heap = new int[capacity];
+        size = 0;
+    }
+
+    public void insert(int value) {
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = value;
+        swim(size);
+        size++;
+    }
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &gt; heap[parent(index)]) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+    }
+
+    private int parent(int index) {
+        return (index - 1) / 2;
+    }
+    public int deleteMax() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int max = heap[0];
+        swap(0, size - 1);
+        size--;
+        heapify(0);
+        return max;
+    }
+    private void heapify(int index) {
+        int largest = index;
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        if (left &lt; size &amp;&amp; heap[left] &gt; heap[largest])
+            largest = left;
+        if (right &lt; size &amp;&amp; heap[right] &gt; heap[largest])
+            largest = right;
+
+        if (largest != index) {
+            swap(index, largest);
+            heapify(largest);
+        }
+    }
+    private void swap(int i, int j) {
+        int temp = heap[i];
+        heap[i] = heap[j];
+</font>        heap[j] = temp;
+    }
+
+
+    public static void main(String[] args) {
+        int nums[] = {4, 10, 2, 8, 6, 7};
+        Scanner sc = new Scanner(System.in);
+<a name="2"></a><font color="#0000FF"><a href="match31-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+        Main maxHeap = new Main(nums.length);
+        
+        for(int i = 0; i &lt; nums.length; i++){
+            maxHeap.insert(nums[i]);
+</font>        }
+        
+        System.out.print("Enter k: " );
+        int k = sc.nextInt();
+        while(k &lt; 0 || k &gt; maxHeap.size){
+            System.out.print("Please enter a valid k: ");
+            k = sc.nextInt();
+        }
+        
+        int x[] = process(maxHeap, k);
+        for(int i = 0; i &lt; x.length; i++){
+            System.out.print(x[i] + " ");
+        }
+    }
+    public static int[] process(Main maxHeap, int k){
+        int arr[] = new int[k];
+        for(int i = 0; i &lt; k; i++){
+            arr[i] = maxHeap.deleteMax();
+        }
+        return arr;
+    }
+}
+</pre>
+</body>
+</html>

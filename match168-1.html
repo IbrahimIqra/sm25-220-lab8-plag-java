@@ -1,0 +1,275 @@
+<html>
+<head>
+<title>A8_Sec26_24101646_Sazid-Hassan-Alvy.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec10_24101556_Safwan-Mohammad-Siam.txt<p></p><pre>
+//Task 3
+
+import java.util.*;
+
+class MinHeap {
+    private int[] heap;
+    private int size;
+    private int capacity;
+
+    public MinHeap(int capacity) {
+        this.heap = new int[capacity];
+        this.capacity = capacity;
+        this.size = 0;
+    }
+    public void insert(int val) {
+        if (size==capacity) {
+            return;
+        }
+        heap[size]=val;
+        swim(size);
+        size++;
+    }
+    
+    private void swim(int idx) {
+        int parent = (idx - 1) / 2;
+        while (idx &gt; 0 &amp;&amp; heap[idx] &lt; heap[parent]) {
+            int temp=heap[idx];
+            heap[idx]=heap[parent];
+            heap[parent]=temp;
+            idx=parent;
+            parent=(idx-1)/2;
+        }
+    }
+
+    
+<a name="3"></a><font color="#00FFFF"><a href="match168-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+    public int extractMin() 
+    {
+        if (size==0) 
+        {
+            return -1;
+        }
+        int top=heap[0];
+        heap[0]=heap[size-1];
+        size--;
+        sink(0);
+        return top;
+    }
+    private void sink(int idx) {
+</font><a name="2"></a><font color="#0000FF"><a href="match168-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_5.gif"/></a>
+
+        int left=2*idx+1;
+        int right=2*idx+2;
+        int small=idx;
+
+        if (left&lt;size&amp;&amp;heap[left]&lt;heap[small]) 
+        {
+            small=left;
+        }
+        if (right&lt;size&amp;&amp;heap[right]&lt;heap[small]) 
+        {
+            small=right;
+        }
+        if (small!=idx) 
+</font>        {
+            int temp=heap[idx];
+            heap[idx]=heap[small];
+            heap[small]= temp;
+<a name="0"></a><font color="#FF0000"><a href="match168-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_5.gif"/></a>
+
+            sink(small);
+        }
+    }
+}
+
+public class Task3 
+    {
+    public static int[]workdo(int[]tasks,int m) 
+        {
+        MinHeap minHeap = new MinHeap(m);
+        for(int i=0;i&lt;m;i++) 
+        {
+            minHeap.insert(0);
+        }
+        for(int i=0;i&lt;tasks.length;i++) 
+        
+        {
+            int saver=minHeap.extractMin();
+</font>            saver=saver+tasks[i];
+<a name="5"></a><font color="#FF0000"><a href="match168-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_4.gif"/></a>
+
+            minHeap.insert(saver);
+        }
+        int[] finals = new int[m];
+        for(int i=0;i&lt;m;i++) 
+        {
+            finals[i]=minHeap.extractMin();
+        }
+        return finals;
+    
+    }
+
+    public static void main(String[] args) 
+</font>        { 
+        
+        Scanner input = new Scanner(System.in);
+        System.out.print("Number of Tasks: ");
+        
+        
+        int n = input.nextInt();
+        int[] given = new int[n];
+        System.out.println("Enter times: ");
+        for(int i=0; i&lt;n; i++) 
+        {
+            given[i] = input.nextInt();
+        }
+        System.out.println("Machine count: ");
+        
+            int m= input.nextInt();
+        
+        int [] output=workdo(given, m);
+        System.out.println("Output: ");
+        for(int i=0;i&lt;output.length;i++) 
+        {
+            System.out.print(output[i]+" ");
+        }
+    
+    }
+    }
+
+
+
+//Task 4 
+
+import java.util.*;
+
+class MaxHeap {
+    private int[] heap;  
+    private int size;  
+    private int capacity;  
+    
+    public MaxHeap(int capacity) {  
+       this.heap=new int[capacity];  
+       this.capacity=capacity;  
+       this.size = 0;  
+    }  
+    
+    public void insert(int val) 
+    {  
+       if(size==capacity) 
+       {  
+          return;
+       }  
+       heap[size]= val;  
+       
+       swim(size);
+       size++;  
+    }  
+    
+    private void swim(int idx) 
+    {  
+        int pidx = (idx-1)/2;
+        while (idx&gt;0 &amp;&amp; heap[idx]&gt;heap[pidx]) 
+        {
+            int temp=heap[idx];
+            heap[idx]=heap[pidx];
+            heap[pidx]=temp;
+            idx=pidx;
+            pidx=(idx-1)/2;
+        }
+    }  
+    
+<a name="4"></a><font color="#FF00FF"><a href="match168-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+    public int extractMax() 
+    {  
+       if (size==0) 
+       {    
+          return -1;
+       }  
+       int top=heap[0]; 
+       heap[0]=heap[size-1];   
+       size--;
+       sink(0); 
+       return top; 
+    }  
+    public void sink (int idx)
+</font>    {
+<a name="1"></a><font color="#00FF00"><a href="match168-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_5.gif"/></a>
+
+        int left =2*idx+1;
+        int right=2*idx+2;
+        int largest=idx;
+        if (left&lt;size &amp;&amp; heap[left]&gt;heap[largest])
+        {
+            largest=left;
+            
+        }
+        if (right&lt;size &amp;&amp; heap[right]&gt;heap[largest])
+        {
+            largest=right;
+        }
+        if (largest!=idx)
+</font>        {
+            int temp=heap[idx];
+            heap[idx]=heap[largest];
+            heap[largest]=temp;
+            sink(largest);
+        }
+    }
+}
+
+public class Task4
+{
+
+    public static int[] maxreturner(int[] received, int k) 
+    {
+        if (k ==0 || received==null ) 
+        {
+            System.out.println("Invalid");
+            return new int[0];
+        }
+        MaxHeap heap= new MaxHeap(received.length);
+
+        for(int i=1;i&lt;=received.length;i++)
+        {
+            heap.insert(received[i-1]);
+        }
+        
+        int[] returner = new int[k];
+
+<a name="6"></a><font color="#00FF00"><a href="match168-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+        for(int i=0;i&lt;k;i++) 
+        {
+            returner[i]=heap.extractMax();
+        }
+
+        return returner; 
+    }
+
+
+    public static void main(String[] args) 
+</font>    {
+         Scanner input = new Scanner(System.in);
+         int n =input.nextInt();
+      
+      int[] given = new int[n];
+
+      for (int i=0; i&lt;n; i++) 
+      {
+         given[i] = input.nextInt();
+      }
+        
+        int k = input.nextInt();
+
+        int[] top = maxreturner(given, k);
+        System.out.println("Output: ");
+        for(int i=0;i&lt;top.length;i++) 
+        {
+            System.out.print(top[i]+" ");
+        }
+
+    }
+}</pre>
+</body>
+</html>

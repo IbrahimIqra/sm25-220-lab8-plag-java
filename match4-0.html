@@ -1,0 +1,283 @@
+<html>
+<head>
+<title>A8_Sec21_24101414_LUBNA-NAZNIN-TISHA.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec21_24101414_LUBNA-NAZNIN-TISHA.txt<p></p><pre>
+//Task3
+<a name="9"></a><font color="#FF00FF"><a href="match4-1.html#9" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+import java.util.*;
+public class T3 {
+   public int[] heap_Arr;  
+  public int size;  
+   public int capacity;  
+   
+   public  T3(int cap) {  
+</font>      heap_Arr = new int[cap];  
+     capacity = cap;  
+<a name="0"></a><font color="#FF0000"><a href="match4-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_13.gif"/></a>
+
+      size = 0;  
+   }  
+   
+   public void insert(int v) {  
+      if (size==capacity) {  
+         return;
+      }  
+      heap_Arr[size] = v;  
+      size++;  
+      swim(size - 1);
+   }  
+   
+   public void swim(int i) {  
+      while (i&gt;0 &amp;&amp; heap_Arr[parent(i)]&gt;heap_Arr[i]) {  
+         swap(i, parent(i));  
+         i = parent(i);  
+      }  
+   }  
+   
+   public void swap(int x, int y) {  
+      int temp = heap_Arr[x];  
+      heap_Arr[x] = heap_Arr[y];  
+      heap_Arr[y] = temp;  
+   }  
+   
+   public int extract_Min() {  
+      if (size==0) {    
+      }  
+      int minV = heap_Arr[0]; 
+      heap_Arr[0] = heap_Arr[size-1];   
+      size--; 
+      sink(0); 
+      return minV; 
+   }  
+   
+   public void sink(int i) {  
+      int Min = i;  
+</font>      while (size &gt;left_Child(i)&amp;&amp; size !=left_Child(i)) {  
+         int leftChild = left_Child(i);  
+         int rightChild = right_Child(i);  
+         
+<a name="10"></a><font color="#FF0000"><a href="match4-1.html#10" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+         if (leftChild&lt;size &amp;&amp;leftChild!=size &amp;&amp; heap_Arr[leftChild]&lt;heap_Arr[Min]) {  
+            Min = leftChild;  
+         }  
+         
+         if (rightChild&lt;size &amp;&amp; heap_Arr[rightChild]&lt;heap_Arr[Min]&amp;&amp;heap_Arr[rightChild]!=heap_Arr[Min]) {  
+</font><a name="5"></a><font color="#FF0000"><a href="match4-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_5.gif"/></a>
+
+           Min= rightChild;  
+         }  
+         
+         if (Min!=i) {  
+            swap(i, Min);  
+            i = Min;
+         } else {  
+            break;  
+         }  
+      }  
+   }  
+   
+  public int parent(int i) {  
+      return (i-1)/2;  
+   }  
+   
+  public int left_Child(int i) {  
+      return 2*i+1;  
+   }  
+   
+   public int right_Child(int i) {  
+      return 2*i+(1*2);  
+</font>   }  
+   
+   public void sort() {  
+      int NewSize = size;  
+<a name="2"></a><font color="#0000FF"><a href="match4-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_8.gif"/></a>
+
+      for (int i=NewSize-1; i==1; i--) {  
+         swap(0, i);
+         size--;   
+         sink(0); 
+      }  
+      size = NewSize; 
+   }  
+   
+   public void printArray() {
+      System.out.println(Arrays.toString(heap_Arr));
+   }
+   
+   
+   public static void main(String[] args) {
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Enter the number of tasks:");
+      int n = sc.nextInt();
+      
+      System.out.println("Estimated time:");
+      int[] tasks = new int[n];
+      for (int i=0; i&lt;=n-1; i++) {
+</font><a name="8"></a><font color="#00FFFF"><a href="match4-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+         tasks[i] = sc.nextInt();
+      }
+      
+      System.out.println("Enter the number of machines:");
+      int m = sc.nextInt();
+      
+      T3 minHeap = new T3(m);
+      for(int i=0; i&lt;=m-1; i++) {
+</font>         minHeap.insert(0); 
+      }
+      
+      for (int i=0; i&lt;=tasks.length-1; i++) {
+<a name="7"></a><font color="#0000FF"><a href="match4-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+         int Task = tasks[i];         
+         int minL = minHeap.extract_Min(); 
+         minL += Task;             
+         minHeap.insert(minL);            
+      }
+      
+      int[] M = new int[m];
+      for(int i=0; i&lt;=m-1; i++) {
+</font>         M[i] = minHeap.extract_Min();
+      }
+      
+      System.out.println(Arrays.toString(M));
+   }
+   
+}
+
+//Task4 
+
+<a name="11"></a><font color="#00FF00"><a href="match4-1.html#11" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+import java.util.*;
+
+public class T4{
+  public int[] heap_Arr;  
+   public int size;  
+   public int capacity;  
+   
+   public T4(int cap) {  
+</font>      heap_Arr = new int[cap];  
+      capacity = cap;  
+<a name="1"></a><font color="#00FF00"><a href="match4-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_12.gif"/></a>
+
+      size = 0;  
+   }  
+   
+   public void insert(int v) {  
+      if (size==capacity) {  
+      }  
+      heap_Arr[size] = v;  
+      size++;  
+      swim(size - 1);  
+   }
+   
+  public void swim(int i) {  
+      while (i&gt;0 &amp;&amp; heap_Arr[parent(i)]&lt;heap_Arr[i]) {  
+         swap(i, parent(i));  
+         i = parent(i);  
+      }  
+   }  
+   
+   private void swap(int x, int y) {  
+      int temp = heap_Arr[x];  
+      heap_Arr[x] = heap_Arr[y];  
+      heap_Arr[y] = temp;  
+   }  
+   
+   public int extract_Max() {  
+      if (size==0) {
+      }  
+      int max= heap_Arr[0];  
+      heap_Arr[0] = heap_Arr[size-1];   
+      size--;  
+      sink(0);  
+      return max;  
+   }  
+   
+   private void sink(int i) {  
+      int L = i;  
+</font>      while (left_Child(i)&lt;size &amp;&amp; left_Child(i)!=size) {  
+<a name="4"></a><font color="#FF00FF"><a href="match4-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_5.gif"/></a>
+
+         int leftChild = left_Child(i);  
+         int rightChild = right_Child(i);  
+         if (rightChild&lt;size &amp;&amp; heap_Arr[rightChild]&gt;heap_Arr[L]) {  
+           L = rightChild;  
+         }  
+         
+         if (leftChild&lt;size &amp;&amp; heap_Arr[leftChild]&gt;heap_Arr[L]) {  
+            L= leftChild;  
+         }  
+         
+         
+         if (L!=i) {  
+            swap(i, L);  
+            i = L;  
+         } else {  
+            break;    
+</font>         }  
+      }  
+   } 
+   public void sort() {  
+      int NewSize = size;  
+      for (int i = NewSize-1; i==1; i--) {  
+         swap(0, i); 
+         size--;  
+         sink(0);  
+      }  
+      size = NewSize;  
+   }
+   
+  
+  public int left_Child(int i) {  
+      return 2*i+1;  
+   }  
+   
+  public int right_Child(int i) {  
+      return 2*i+2*1;  
+   }  
+   
+   
+    public int parent(int i) {  
+<a name="3"></a><font color="#00FFFF"><a href="match4-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_7.gif"/></a>
+
+      return (i-1)/2*1;  
+   }  
+   
+   public void printArray() {
+      System.out.println(Arrays.toString(heap_Arr));
+   }
+   
+   public static void main(String[] args){
+      Scanner sc = new Scanner(System.in);
+      System.out.print("Enter the size of array");
+      int x = sc.nextInt();
+      
+      System.out.println("Enter elements of array");
+      int Arr[]= new int[x];
+      T4 add = new T4(x);
+      for(int i=0; i&lt;=Arr.length-1; i++){
+</font><a name="6"></a><font color="#00FF00"><a href="match4-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_4.gif"/></a>
+
+         Arr[i]= sc.nextInt();
+        add.insert(Arr[i]);
+      }
+      
+      System.out.print("Enter the size of largest element containing array");
+      int t = sc.nextInt();
+      int [] Value = new int[t];
+      
+      for(int i=0; i&lt;= Value.length-1; i++){
+</font>          Value[i]= add.extract_Max();      
+      }
+      System.out.println(Arrays.toString( Value));
+   }
+}</pre>
+</body>
+</html>

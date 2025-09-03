@@ -1,0 +1,369 @@
+<html>
+<head>
+<title>A8_Sec08_24301042_Tanzim-Rahman---TANZIM-RAHMAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec10_24301208_Sayed-Mahamud-.txt<p></p><pre>
+// max_heap:
+
+
+
+
+public class MaxHeap {
+    private Integer[] max_heap_arr;
+    private int mh_size;
+    private int mh_capacity;
+
+    public MaxHeap(int cap) {
+        this.max_heap_arr = new Integer[cap];
+        this.mh_size = 0;
+        this.mh_capacity = cap;
+    }
+
+    public void mh_insert(int elem) {
+        if (mh_size &gt;= mh_capacity) {
+            System.out.println("Heap full!");
+            return;
+        }
+
+        max_heap_arr[mh_size] = elem;
+        mh_swim(mh_size);
+        mh_size++;
+    }
+
+    private void mh_swim(int index) {
+        while (index &gt; 0) {
+            int parent = (index - 1) / 2;
+            if (max_heap_arr[index] &lt;= max_heap_arr[parent]) break;
+
+            max_swap(index, parent);
+            index = parent;
+        }
+    }
+
+    public int remove_max() {
+        if (mh_size &lt;= 0) {
+            System.out.println("Heap empty!");
+            return -1;
+        }
+
+        int max = max_heap_arr[0];
+        max_heap_arr[0] = max_heap_arr[mh_size - 1];
+        max_heap_arr[mh_size - 1] = null;
+        mh_size--;
+
+        mh_heapify(0);
+        return max;
+    }
+
+    private void mh_heapify(int index) {
+        int largest = index;
+        int left = (index * 2) + 1;
+        int right = (index * 2) + 2;
+
+        if (left &lt; mh_size &amp;&amp; max_heap_arr[left] &gt; max_heap_arr[largest]) {
+            largest = left;
+        }
+
+        if (right &lt; mh_size &amp;&amp; max_heap_arr[right] &gt; max_heap_arr[largest]) {
+            largest = right;
+        }
+
+        if (largest != index) {
+            max_swap(index, largest);
+            mh_heapify(largest);
+        }
+    }
+
+    private void max_swap(int i, int j) {
+        int temp = max_heap_arr[i];
+        max_heap_arr[i] = max_heap_arr[j];
+        max_heap_arr[j] = temp;
+    }
+
+    public int[] mh_sort() {
+        int[] sorted = new int[mh_size];
+        int originalSize = mh_size;
+
+        for (int i = 0; i &lt; originalSize; i++) {
+            sorted[i] = remove_max();
+        }
+        
+        return sorted;
+    }
+
+    public void mh_print() {
+        for (int i = 0; i &lt; mh_size; i++) {
+            System.out.print(max_heap_arr[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+
+
+
+// min_heap:
+
+
+
+public class MinHeap {
+    private Integer[] mih_heap_arr;
+    private int mih_size;
+    private int mih_capacity;
+
+    public MinHeap(int cap) {
+<a name="1"></a><font color="#00FF00"><a href="match151-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+        this.mih_heap_arr = new Integer[cap];
+        this.mih_size = 0;
+        this.mih_capacity = cap;
+    }
+
+    public void mih_insert(int elem) {
+        if (this.mih_size &gt;= this.mih_capacity) {
+            System.out.println("Heap full!");
+            return;
+        }
+        this.mih_heap_arr[this.mih_size] = elem;
+        mih_swim(this.mih_size);
+</font>        this.mih_size++;
+    }
+
+<a name="6"></a><font color="#00FF00"><a href="match151-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_1.gif"/></a>
+
+    private void mih_swim(int index) {
+        int pae_pos = (index - 1) / 2;
+
+        while (index &gt; 0 &amp;&amp; this.mih_heap_arr[index] &lt; this.mih_heap_arr[pae_pos]) {
+</font>            mih_swap(index, pae_pos);
+<a name="0"></a><font color="#FF0000"><a href="match151-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_4.gif"/></a>
+
+            index = pae_pos;
+            pae_pos = (index - 1) / 2;
+        }
+    }
+
+    public int remove_min() {
+        if (this.mih_size &lt;= 0) {
+            System.out.println("Heap empty!");
+            return -1;
+        }
+
+        int min = this.mih_heap_arr[0];
+        this.mih_heap_arr[0] = this.mih_heap_arr[this.mih_size - 1];
+        this.mih_heap_arr[this.mih_size - 1] = null;
+</font>        this.mih_size--;
+
+        mih_heapify(0);
+        return min;
+    }
+
+    private void mih_heapify(int index) {
+        int smallest = index;
+        int left = (index * 2) + 1;
+<a name="7"></a><font color="#0000FF"><a href="match151-0.html#7" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_1.gif"/></a>
+
+        int right = (index * 2) + 2;
+
+        if (left &lt; this.mih_size &amp;&amp; this.mih_heap_arr[left] &lt; this.mih_heap_arr[smallest]) {
+            smallest = left;
+        }
+        if (right &lt; this.mih_size &amp;&amp; this.mih_heap_arr[right] &lt; this.mih_heap_arr[smallest]) {
+</font>            smallest = right;
+        }
+
+        if (smallest != index) {
+            mih_swap(index, smallest);
+            mih_heapify(smallest);
+        }
+    }
+
+    public void mih_swap(int i, int j) {
+<a name="5"></a><font color="#FF0000"><a href="match151-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+        int temp = this.mih_heap_arr[i];
+        this.mih_heap_arr[i] = this.mih_heap_arr[j];
+        this.mih_heap_arr[j] = temp;
+</font>    }
+
+    public int[] mih_sort() {
+        int[] sorted = new int[this.mih_size];
+        int sizeCopy = this.mih_size;
+
+        for (int i = 0; i &lt; sizeCopy; i++) {
+            sorted[i] = remove_min();
+        }
+        return sorted;
+    }
+
+    public void mih_print() {
+        for (int i = 0; i &lt; this.mih_size; i++) {
+            System.out.print(this.mih_heap_arr[i] + " ");
+        }
+<a name="2"></a><font color="#0000FF"><a href="match151-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+        System.out.println();
+    }
+}
+
+
+
+
+// Main:
+
+
+
+
+public class main {
+
+    public static int[] task3(int[] tasks, int m) {
+
+        MinHeap heap = new MinHeap(m);
+
+        for (int i = 0; i &lt; m; i++) {
+            heap.mih_insert(0);
+</font>        }
+
+        for (int task : tasks) {
+            int minLoad = heap.remove_min();
+            heap.mih_insert(minLoad + task);
+        }
+
+        int[] result = new int[m];
+
+        for (int i = 0; i &lt; m; i++) {
+            result[i] = heap.remove_min();
+        }
+
+        return result;
+    }
+
+    public static int[] task4(int[] nums, int k) {
+        
+        MaxHeap heap = new MaxHeap(nums.length);
+        
+        for (int num : nums) {
+<a name="8"></a><font color="#00FFFF"><a href="match151-0.html#8" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_1.gif"/></a>
+
+            heap.mh_insert(num);
+        }
+
+        
+        int[] result = new int[k];
+        for (int i = 0; i &lt; k; i++) {
+            result[i] = heap.remove_max();
+</font>        }
+        return result;
+    }
+
+
+    public static void main(String[] args) {
+        MaxHeap max_h = new MaxHeap(10);
+        MinHeap min_h = new MinHeap(10);
+
+        max_h.mh_insert(1);
+        max_h.mh_insert(2);
+        max_h.mh_insert(3);
+        max_h.mh_insert(4);
+        max_h.mh_insert(5);
+        max_h.mh_insert(6);
+        max_h.mh_insert(7);
+        max_h.mh_insert(8);
+        max_h.mh_insert(9);
+        max_h.mh_insert(13);
+
+        min_h.mih_insert(1);
+        min_h.mih_insert(2);
+        min_h.mih_insert(3);
+        min_h.mih_insert(4);
+        min_h.mih_insert(5);
+        min_h.mih_insert(6);
+        min_h.mih_insert(7);
+        min_h.mih_insert(8);
+        min_h.mih_insert(9);
+        min_h.mih_insert(13);
+        //max_h.mh_insert(10);
+
+        System.out.println();
+        
+        max_h.mh_print();
+        min_h.mih_print();
+
+        System.out.println();
+        System.out.println("&lt;=========================================&gt;");
+        System.out.println();
+
+        System.out.println(max_h.remove_max());
+        max_h.mh_print();
+
+        System.out.println(max_h.remove_max());
+        max_h.mh_print();
+
+        System.out.println(max_h.remove_max());
+        max_h.mh_print();
+
+        System.out.println(max_h.remove_max());
+        max_h.mh_print();
+
+        System.out.println(max_h.remove_max());
+        max_h.mh_print();
+
+        System.out.println("------------------------------------------");
+
+        System.out.println(min_h.remove_min());
+        min_h.mih_print();
+
+        System.out.println(min_h.remove_min());
+        min_h.mih_print();
+
+        System.out.println(min_h.remove_min());
+        min_h.mih_print();
+
+        System.out.println(min_h.remove_min());
+        min_h.mih_print();
+
+        System.out.println(min_h.remove_min());
+        min_h.mih_print();
+
+        System.out.println();
+        System.out.println("&lt;=========================================&gt;");
+        System.out.println();
+
+<a name="3"></a><font color="#00FFFF"><a href="match151-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+        int[] tasks = {2, 4, 7, 1, 6};
+        int m = 4;
+
+        int[] loads = task3(tasks, m);
+
+        System.out.print("Final machine loads: ");
+</font>        for (int load : loads) {
+            System.out.print(load + " ");
+        }
+
+        System.out.println();
+        System.out.println("&lt;=========================================&gt;");
+        System.out.println();
+
+<a name="4"></a><font color="#FF00FF"><a href="match151-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+        int[] nums = {4, 10, 2, 8, 6, 7};
+        int k = 3;
+
+        int[] top = task4(nums, k);
+
+        System.out.print("Top " + k + " largest elements: ");
+</font>        for (int val : top) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+
+        System.out.println();
+        System.out.println("&lt;=========================================&gt;");
+        System.out.println();
+        
+</pre>
+</body>
+</html>

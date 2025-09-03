@@ -1,0 +1,281 @@
+<html>
+<head>
+<title>A8_Sec05_24101162_Nafi-Nowaisir-chowdhury---NAFI-NOWAISIR-CHOWDHURY.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec05_24101162_Nafi-Nowaisir-chowdhury---NAFI-NOWAISIR-CHOWDHURY.txt<p></p><pre>
+public class MaxHeap {
+    private int[] heap;
+    private int capacity;
+    private int size;
+    public MaxHeap(int c) {
+        capacity = c;
+        heap = new int[capacity];
+        size = 0;
+    }
+
+<a name="3"></a><font color="#00FFFF"><a href="match38-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+    public void sort() {
+        int main = size;
+        for (int i = size-1; i &gt; 0; i--) {
+            swap(0, i);
+            size--;
+            sink(0);
+        }
+        size = main;
+    }
+
+    public void insert (int val) {
+</font><a name="8"></a><font color="#00FFFF"><a href="match38-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = val;
+        swim(size);
+        size++;
+    }
+
+    public void delete (int val) {
+</font>        if (size == 0) throw new IllegalStateException("Heap is empty");
+        int index = -1;
+
+        for (int i = 0; i &lt; size; i++) {
+            if (heap[i] == val) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            System.out.println("Value not found");
+            return;
+        }
+
+        swap(index, size-1);
+        size--;
+        swim(index);
+        sink(index);
+    }
+
+    private void swap (int x, int y) {
+        int temp = heap[x];
+        heap[x] = heap[y];
+        heap[y] = temp;
+    }
+
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &gt; heap[(index-1)/2]) {
+            swap(index, (index-1)/2);
+            index = (index-1)/2;
+        }
+    }
+
+<a name="0"></a><font color="#FF0000"><a href="match38-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+    private void sink(int index) {
+        int largest = index;
+        int left = 2*(index) + 1;
+        int right = 2*(index) + 2;
+
+        if (left &lt; size &amp;&amp; heap[largest] &lt; heap[left]) largest = left;
+        if (right &lt; size &amp;&amp; heap[largest] &lt; heap[right]) largest = right;
+
+        if (largest != index) {
+            swap(index, largest);
+            sink(largest);
+</font>        }
+    }
+
+<a name="5"></a><font color="#FF0000"><a href="match38-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+    public int extractMax() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int largest = heap[0];
+        swap(0, size-1);
+        size--;
+        sink(0);
+        return largest;
+    }
+
+</font>    public void printHeap() {
+        for (int i = 0; i &lt; size; i++) {
+<a name="10"></a><font color="#FF0000"><a href="match38-1.html#10" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+}
+public class MinHeap {
+</font>    private int[] heap;
+    private int capacity;
+    private int size;
+    public MinHeap(int c) {
+        capacity = c;
+        heap = new int[capacity];
+        size = 0;
+    }
+
+<a name="4"></a><font color="#FF00FF"><a href="match38-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+    public void sort() {
+        int main = size;
+        for (int i = size-1; i &gt; 0; i--) {
+            swap(0, i);
+            size--;
+            sink(0);
+        }
+        size = main;
+    }
+
+    public void insert (int val) {
+</font><a name="9"></a><font color="#FF00FF"><a href="match38-1.html#9" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+        if (size == capacity) {
+            System.out.println("Heap is full");
+            return;
+        }
+        heap[size] = val;
+        swim(size);
+        size++;
+    }
+
+    public void delete (int val) {
+</font>        if (size == 0) throw new IllegalStateException("Heap is empty");
+        int index = -1;
+
+        for (int i = 0; i &lt; size; i++) {
+            if (heap[i] == val) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            System.out.println("Value not found");
+            return;
+        }
+
+        swap(index, size-1);
+        size--;
+        swim(index);
+        sink(index);
+    }
+
+    private void swap (int x, int y) {
+        int temp = heap[x];
+        heap[x] = heap[y];
+        heap[y] = temp;
+    }
+
+    private void swim(int index) {
+        while (index &gt; 0 &amp;&amp; heap[index] &lt; heap[(index-1)/2]) {
+            swap(index, (index-1)/2);
+            index = (index-1)/2;
+        }
+    }
+
+<a name="1"></a><font color="#00FF00"><a href="match38-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+    private void sink(int index) {
+        int smallest = index;
+        int left = 2*(index) + 1;
+        int right = 2*(index) + 2;
+
+        if (left &lt; size &amp;&amp; heap[smallest] &gt; heap[left]) smallest = left;
+        if (right &lt; size &amp;&amp; heap[smallest] &gt; heap[right]) smallest = right;
+
+        if (smallest != index) {
+            swap(index, smallest);
+            sink(smallest);
+</font>        }
+    }
+
+<a name="6"></a><font color="#00FF00"><a href="match38-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+    public int extractMin() {
+        if (size == 0) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        int smallest = heap[0];
+        swap(0, size-1);
+        size--;
+        sink(0);
+        return smallest;
+    }
+
+</font>    public void printHeap() {
+        for (int i = 0; i &lt; size; i++) {
+<a name="7"></a><font color="#0000FF"><a href="match38-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public void printAs() {
+</font>        while (size &gt; 0) {
+            System.out.print(extractMin());
+        }
+    }
+
+}
+3.import java.util.Scanner;
+
+public class task3 {
+    public static void tasking(int[] arr, MinHeap heap) {
+        for (int i = 0; i &lt; arr.length; i++) {
+            int x = heap.extractMin();
+            heap.insert(x + arr[i]);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int[] arr = new int[sc.nextInt()];
+        for (int i = 0; i &lt; arr.length; i++) {
+<a name="11"></a><font color="#00FF00"><a href="match38-1.html#11" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+            arr[i] = sc.nextInt();
+        }
+        MinHeap heap = new MinHeap(m);
+        for (int i = 0; i &lt; m; i++) {
+            heap.insert(0);
+        }
+        tasking(arr, heap);
+</font>        heap.printAs();
+        sc.close();
+    }
+}
+4.import java.util.Arrays;
+import java.util.Scanner;
+public class task4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[sc.nextInt()];
+        for (int i = 0; i &lt; arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int k = sc.nextInt();
+<a name="2"></a><font color="#0000FF"><a href="match38-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+        MaxHeap heap = new MaxHeap(arr.length);
+        for (int i = 0; i &lt; arr.length; i++) {
+            heap.insert(arr[i]);
+        }
+        int[] lar = new int[k];
+        for (int i = 0; i &lt; k; i++) {
+</font>            lar[i] = heap.extractMax();
+        }
+        System.out.println(Arrays.toString(lar));
+        sc.close();
+    }
+}</pre>
+</body>
+</html>

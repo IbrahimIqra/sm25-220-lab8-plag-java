@@ -1,0 +1,238 @@
+<html>
+<head>
+<title>A8_Sec17_24101251_Abdul-Kadir-Abir.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec17_24101251_Abdul-Kadir-Abir.txt<p></p><pre>
+//MinHeap
+import java.util.Arrays;
+<a name="3"></a><font color="#00FFFF"><a href="match95-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+public class MinHeap {
+    private int[] heap;
+    private int size;
+    private int capacity;
+    public MinHeap(int capacity){
+        this.capacity=capacity;
+        this.size=0;
+        this.heap=new int[this.capacity];
+</font>    }
+    private int parent(int i){
+        return (i-1)/2;
+    }
+    private int leftChild(int i){
+        return 2*i+1;
+    }
+    private int rightChild(int i){
+        return 2*i+2;
+    }
+    public void swim(int curr){
+        while(curr &gt; 0&amp;&amp;heap[curr]&lt;heap[parent(curr)]){
+            swap(curr,parent(curr));
+            curr=parent(curr);
+        }
+    }
+    public void insert(int elem){
+<a name="7"></a><font color="#0000FF"><a href="match95-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+        if (size &gt;= capacity) {
+            System.out.println("Heap is full. Cannot insert.");
+            return;
+        }
+        heap[size]=elem;
+        size++;
+        swim(size-1);
+    }
+    private void swap(int x, int y){
+</font>        int temp=heap[x];
+        heap[x]=heap[y];
+        heap[y]=temp;
+    }
+    public int extractMin(){
+        int pop=heap[0];
+        heap[0]=heap[--size];
+        sink(0);
+        return pop;
+    }
+    public void sink(int idx){
+        int minidx=idx;
+        while (true) {
+            int lidx=leftChild(idx);
+            int ridx=rightChild(idx);
+<a name="2"></a><font color="#0000FF"><a href="match95-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_4.gif"/></a>
+
+            if(lidx&lt;size &amp;&amp; heap[lidx] &lt; heap[minidx]){
+                minidx=lidx;
+            }
+            if(ridx&lt;size &amp;&amp; heap[ridx] &lt; heap[minidx]){
+                minidx=ridx;
+            }
+            if(idx!=minidx){
+                swap(idx,minidx);
+</font>                idx=minidx;
+            }
+            else{
+                break;
+            }
+        }
+    }
+    public int[] sort() {
+        int[] sortedArray = new int[size];
+        int originalSize = size;
+        for (int i = 0; i &lt; originalSize; i++) {
+            sortedArray[i] = extractMin();
+        }
+        // Restore the heap state after sorting
+        this.size = originalSize;
+        return sortedArray;
+    }
+    public void printHeap() {
+        System.out.println(Arrays.toString(Arrays.copyOf(heap, size)));
+    }
+}
+//MaxHeap
+import java.util.Arrays;
+<a name="4"></a><font color="#FF00FF"><a href="match95-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+public class MaxHeap {
+    private int[] heap;
+    private int size;
+    private int capacity;
+    public MaxHeap(int capacity){
+        this.capacity=capacity;
+        this.size=0;
+        this.heap=new int[this.capacity];
+</font>    }
+    private int parent(int i){
+        return (i-1)/2;
+    }
+    private int leftChild(int i){
+        return 2*i+1;
+    }
+    private int rightChild(int i){
+        return 2*i+2;
+    }
+    public int[] getHeapArray() {
+        int[] result = Arrays.copyOf(heap, size);
+        Arrays.sort(result); // Sorts to match the sample output format
+        return result;
+    }
+    public void swim(int curr){
+        while(curr &gt; 0 &amp;&amp; heap[curr]&gt;heap[parent(curr)]){
+            swap(curr,parent(curr));
+            curr=parent(curr);
+        }
+    }
+    public void insert(int elem){
+<a name="8"></a><font color="#00FFFF"><a href="match95-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+        if (size &gt;= capacity) {
+            System.out.println("Heap is full. Cannot insert.");
+            return;
+        }
+        heap[size]=elem;
+        size++;
+        swim(size-1);
+    }
+    private void swap(int x, int y){
+</font>        int temp=heap[x];
+        heap[x]=heap[y];
+        heap[y]=temp;
+    }
+    public int extractMax(){
+        int pop=heap[0];
+        heap[0]=heap[--size];
+        sink(0);
+        return pop;
+    }
+    public void sink(int idx){
+        int maxidx =idx;
+        while (true) {
+            int lidx=leftChild(idx);
+<a name="0"></a><font color="#FF0000"><a href="match95-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_5.gif"/></a>
+
+            int ridx=rightChild(idx);
+            if(lidx&lt;size &amp;&amp; heap[lidx] &gt; heap[maxidx]){
+                maxidx =lidx;
+            }
+            if(ridx&lt;size &amp;&amp; heap[ridx] &gt; heap[maxidx]){
+                maxidx =ridx;
+            }
+            if(idx!= maxidx){
+                swap(idx, maxidx);
+                idx= maxidx;
+            }
+            else{
+                break;
+            }
+        }
+    }
+    private void sort(){
+        int osize=this.size;
+</font>        for (int i = osize-1; i &gt; 0; i--) {
+            swap(0,i);
+            this.size--;
+            sink(0);
+        }
+        this.size=osize;
+    }
+    public void printHeap() {
+        System.out.println(Arrays.toString(Arrays.copyOf(heap, size)));
+    }
+}
+//Task_3
+import java.util.Arrays;
+
+public class Task_3Scheduler {
+<a name="9"></a><font color="#FF00FF"><a href="match95-1.html#9" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+    public static void scheduler(int arr[],int m){
+        MinHeap load=new MinHeap(m);
+        for (int i = 0; i &lt; m; i++) {
+            load.insert(0);
+</font>        }
+        for (int tasks : arr) {
+            int min= load.extractMin();
+            int sum= min+tasks;
+            load.insert(sum);
+        }
+<a name="6"></a><font color="#00FF00"><a href="match95-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+        System.out.println("Final loads: "+Arrays.toString(load.sort()));
+    }
+    public static void main(String[]args){
+        int[] arr={2,4,7,1,6};
+        int m=4;
+</font>        scheduler(arr,m);
+    }
+}
+//Task_4
+<a name="1"></a><font color="#00FF00"><a href="match95-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_4.gif"/></a>
+
+import java.util.Arrays;
+
+public class largest {
+    public static int[] findLarge(int[] arr, int k){
+        MaxHeap maxHeap =new MaxHeap(arr.length);
+        for (int i = 0; i &lt; arr.length; i++) {
+            maxHeap.insert(arr[i]);
+</font>        }
+        int large[]=new int[k];
+<a name="5"></a><font color="#FF0000"><a href="match95-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+        for (int i = 0; i &lt; k; i++) {
+            large[i]= maxHeap.extractMax();
+        }
+        return large;
+    }
+    public static void main(String[]args){
+        int arr[]={4, 10, 2, 8, 6, 7};
+</font>        int k=3;
+        System.out.println(Arrays.toString(findLarge(arr,k)));
+    }
+}
+
+</pre>
+</body>
+</html>

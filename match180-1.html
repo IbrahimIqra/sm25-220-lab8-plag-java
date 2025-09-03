@@ -1,0 +1,222 @@
+<html>
+<head>
+<title>A08_Sec07_24341027_AbyadRazin---ABYAD-RAZIN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec02_24101609_Jannatul-ferduse.txt<p></p><pre>
+﻿//task3 Assignment 8
+//helper class for the task3 ( minheap) 
+public class hm {
+       int s;
+       int[] a;
+ hm(int index) {
+       a = new int[index];
+        s = 0;
+    }
+ public int extractOfMin() {
+<a name="5"></a><font color="#FF0000"><a href="match180-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+        if (s == 0) {
+     return -1;
+      }
+        int base = a[0];
+        a[0] = a[s - 1];
+        s=s-1;
+</font>        turnheap(0);
+        return base;
+    }
+public void include(int am) {
+        a[s] = am;
+        int k= s;
+        s=s+1;
+     while (k &gt; 0 &amp;&amp; a[k] &lt; a[(k - 1) / 2]) {
+            exchange(k, (k - 1) / 2);
+            k = (k - 1) / 2;
+        }
+ }
+
+
+<a name="4"></a><font color="#FF00FF"><a href="match180-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+       public void exchange(int f, int g) {
+        int b = a[f];
+       a[f] = a[g];
+        a[g] = b;
+    }
+     public void turnheap(int j) {
+        int left = 2 * j + 1;
+</font>          int right = 2 * j+ 2;
+        int smallest = j;
+        
+<a name="3"></a><font color="#00FFFF"><a href="match180-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+        if (right &lt; s&amp;&amp; a[right] &lt; a[smallest]){
+          smallest = right;
+        }
+        if (left &lt; s &amp;&amp; a[left] &lt; a[smallest]){
+          smallest = left;
+        }
+        if (smallest != j) {
+            exchange(j, smallest);
+            turnheap(smallest);
+</font>        }
+    }
+}
+
+
+//main code and driver code
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+public class T81 {
+public static int[] spreadtask(int[] c, int mac) {
+    hm nh = new hm(c.length + mac);
+    int d = 0;
+    while (d &lt; mac) {
+        nh.include(0);
+        d=d+1;
+    }
+    int r = 0;
+    while (r &lt; c.length) {
+        int smallest1 = nh.extractOfMin();
+        int x = c[r];
+        smallest1 = smallest1 + x;
+        nh.include(smallest1);
+        r=r+1;
+    }
+    int[] conclusion = new int[mac];
+    int l = 0;
+    while (l &lt; mac) {
+        conclusion[l] = nh.extractOfMin();
+        l=l+1;
+    }
+  return conclusion;
+}
+
+
+<a name="0"></a><font color="#FF0000"><a href="match180-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_8.gif"/></a>
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+       System.out.print("number of tasks: ");
+        int y = sc.nextInt();
+        int[] t = new int[y];
+    System.out.println("times of tasks:");
+        for (int k = 0; k &lt; y; k++) {
+            t[k] = sc.nextInt();
+        }
+        System.out.print(" number of machines: ");
+        int mac1 = sc.nextInt();
+</font>     int[] conclusion = spreadtask(t, mac1);
+     System.out.println("Final loads on machines: " + Arrays.toString(conclusion));
+        sc.close();
+    }
+}
+//task4 Assignment 8
+
+
+//helper class( maxheap )
+
+
+public class hm11 {
+    int s;
+    int[] a;
+ public hm11(int index) {
+        a = new int[index];
+        s = 0;
+ }
+ public void include(int am) {
+     a[s] = am;
+        int k = s;
+        s=s+1;
+        while (k &gt; 0 &amp;&amp; a[k] &gt; a[(k - 1) / 2]) {
+            exchange(k, (k - 1) / 2);
+            k = (k - 1) / 2;
+        }
+    }
+ public int extractOfMax() {
+      if (s == 0) {
+        return -1;
+      }
+        int base = a[0];
+        a[0] = a[s - 1];
+        s=s-1;
+        turnheap(0);
+        return base;
+    }
+   private void turnheap(int j) {
+        int left = 2 * j + 1;
+        int right = 2 * j + 2;
+<a name="2"></a><font color="#0000FF"><a href="match180-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_5.gif"/></a>
+
+        int big = j;
+
+
+        if (left &lt; s &amp;&amp; a[left] &gt; a[big]) {
+          big = left;
+        }
+        if (right &lt; s &amp;&amp; a[right] &gt; a[big]) {
+          big = right;
+        }
+
+
+        if (big != j) {
+            exchange(j, big);
+            turnheap(big);
+        }
+    }
+    private void exchange(int f, int g) {
+</font>        int b = a[f];
+        a[f] = a[g];
+        a[g] = b;
+    } }
+
+
+//main class code and driver code
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class T822 {
+ public static int[] tL(int[] nums, int k) {
+        hm11 mH = new hm11(nums.length);
+        int j = 0;
+      while (j &lt; nums.length) {
+      mH.include(nums[j]);
+      j++;
+     }
+     int[] conclusion = new int[k];
+        int i = 0;
+          while (i &lt; k) {
+      conclusion[i] = mH.extractOfMax();
+       i++;
+      }
+    return conclusion;
+    }
+
+
+    
+<a name="1"></a><font color="#00FF00"><a href="match180-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_8.gif"/></a>
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+       System.out.print(" elements number ");
+        int a = sc.nextInt();
+        int[] h = new int[a];
+       System.out.println(" elements:");
+        for (int i = 0; i &lt; a; i++) {
+            h[i] = sc.nextInt();
+        }
+ System.out.print("Enter f (number of largest elements to find): ");
+        int f = sc.nextInt();
+</font>
+
+        int[] tK = tL(h, f);
+        System.out.println("Top " + f + " largest elements: " + Arrays.toString(tK));
+       sc.close();
+    }
+}</pre>
+</body>
+</html>

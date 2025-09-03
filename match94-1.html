@@ -1,0 +1,256 @@
+<html>
+<head>
+<title>A8_Sec05_24101162_Nafi-Nowaisir-chowdhury---NAFI-NOWAISIR-CHOWDHURY.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_sec04_23201211_Walid-Mahmud-Khan---WALID-MAHMUD-KHAN.txt<p></p><pre>
+LAB 08
+
+
+Task 3
+
+public void insert(int value){
+      if(heap.length == size){
+        System.out.println("Heap Full");
+       return ;
+      }
+      
+      heap[size] = value;
+      swim(size);
+      size++;
+    }
+    
+    public int extractMin(){
+      if(size &lt;= 0){
+        System.out.println("Heap is empty.");
+        return -1;
+      }
+      
+      int min = heap[0];
+      heap[0] = heap[size-1];
+      size--;
+      sink(0);      
+      return min;
+    }
+    
+    private void swap(int a, int b){
+<a name="0"></a><font color="#FF0000"><a href="match94-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_10.gif"/></a>
+
+      int temp = heap[a];
+      heap[a] = heap[b];
+      heap[b] = temp;
+    }
+    
+    private void swim(int i){
+      while(i&gt;0 &amp;&amp; heap[i] &lt; heap[(i-1)/2]){
+        swap(i, (i-1)/2);
+        i = (i-1)/2;
+      }
+    }
+    
+    private void sink(int i){
+      int minimum = i;
+      int left = (2*i+1); 
+      int right = (2*i+2);
+      if(left &lt; size &amp;&amp; heap[minimum] &gt; heap[left]){
+</font><a name="4"></a><font color="#FF00FF"><a href="match94-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+        minimum = left;
+      }
+      
+      if(right &lt; size &amp;&amp; heap[minimum] &gt; heap[right]){
+        minimum = right;
+      }
+      
+      if(minimum != i){
+        swap(i, minimum);
+        sink(minimum);
+</font>      }
+    }
+    
+<a name="5"></a><font color="#FF0000"><a href="match94-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+    public void sort(){
+      int s = size;
+      for(int i = size - 1; i&gt; 0; i--){    
+        swap(0, i);
+        size--;
+        sink(0);
+      }
+      
+      size = s;
+</font>    }
+    
+    public Integer [] getheap(){
+      return heap;
+    }
+    
+    public int getsize(){
+      return size;
+    }
+}
+
+
+
+public class Task3{
+  public static void main(String[]args){
+    int[] tasks = {2,4,7,1,6};
+    int m = 4;
+    
+    TaskHeap heap = new TaskHeap(m);
+    for(int i=0; i&lt;m; i++){
+      heap.insert(0);
+    }
+    
+    for(int i=0; i&lt;tasks.length; i++){
+      int smallest_idx = heap.extractMin();
+      int idx_load = smallest_idx + tasks[i];
+      heap.insert(idx_load);
+    }
+    
+    int[]result = new int[m];
+    for(int i=0; i&lt;m; i++){
+      result[i] = heap.extractMin();
+    }
+    
+    System.out.println("Sample Output:");
+    System.out.print("[");
+    for (int j = 0; j &lt; result.length; j++) {
+      System.out.print(result[j]);
+      if (j &lt; result.length - 1) System.out.print(", ");
+    }
+    System.out.println("]");
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Task 4
+
+  public void insert(int value){
+    if(heap.length == size){
+      System.out.println("Heap is full.");
+      return;
+    }
+    
+    heap[size] = value;
+    size++;
+    swim(size-1);
+  }
+
+  public int extractMax(){
+    if(size &lt;= 0){
+      System.out.println("Heap is empty.");
+      return -1;
+    }
+    
+    int max = heap[0];
+    heap[0] = heap[size - 1];
+    size--;
+    sink(0);      
+    return max;
+  }
+
+  private void swap(int i, int j){
+<a name="1"></a><font color="#00FF00"><a href="match94-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_8.gif"/></a>
+
+    int temp = heap[i];
+    heap[i] = heap[j];
+    heap[j] = temp;
+  }
+    
+    public void swim(int index){
+    while(index&gt;0 &amp;&amp; heap[index] &gt; heap[(index-1)/2]){
+      swap(index,(index-1)/2);
+      index = (index-1)/2;
+    }
+  }
+  
+  public void sink(int i) {
+    int maximum = i;
+    int left = 2*i + 1 , right = 2*i+2;
+</font>    if(left &lt; size &amp;&amp; heap[maximum] &lt; heap[left]){
+      maximum = left;
+<a name="3"></a><font color="#00FFFF"><a href="match94-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_4.gif"/></a>
+
+    }
+    
+    if(right &lt; size &amp;&amp; heap[maximum] &lt; heap[right]){
+      maximum = right;
+    }
+    
+    if(maximum != i){
+      swap(i, maximum);
+      sink(maximum);
+</font>    }
+  }
+
+<a name="6"></a><font color="#00FF00"><a href="match94-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+  public void sort(){
+    int s = size;
+    for(int i = size - 1; i&gt; 0; i--){
+      swap(0, i);
+      size--;
+      sink(0);
+    }    
+    size=s;
+</font>  }
+    
+  public int[]getheap(){
+    return heap;
+  }
+  
+  public int getsize(){
+    return size;
+  }
+}
+
+
+
+
+
+public class Task4{ 
+  public static void main(String[] args){
+    int[] arr = {4,10,2,8,6,7};
+    int k = 3;
+    
+<a name="2"></a><font color="#0000FF"><a href="match94-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_5.gif"/></a>
+
+    TaskMaxHeap heap = new TaskMaxHeap(arr.length);
+    for(int i=0; i&lt;arr.length; i++){
+      heap.insert(arr[i]);
+    }
+    
+    int[]result = new int[k];
+    for(int i=0; i&lt;k; i++){
+</font>      result[i] = heap.extractMax();
+    }
+    
+    System.out.println("Output:");
+    System.out.print("[");
+    for (int j = 0; j &lt; result.length; j++) {
+      System.out.print(result[j]);
+      if(j &lt; result.length - 1){
+        System.out.print(", ");
+      }
+      //System.out.print("]");      
+    }
+    System.out.print("]");
+  }
+}
+</pre>
+</body>
+</html>

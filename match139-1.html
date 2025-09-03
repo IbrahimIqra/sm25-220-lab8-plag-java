@@ -1,0 +1,242 @@
+<html>
+<head>
+<title>A8_Sec08_24301269_Saabiq-Khan.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec04_23201457_Arafkamal.txt<p></p><pre>
+//Task-03//
+import java.util.Arrays;
+
+	    public int[] getHeapArray() {
+	        return Arrays.copyOf(this.heapArray, this.size);
+	    }
+
+	    public int getSize() {
+<a name="0"></a><font color="#FF0000"><a href="match139-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+	        return this.size;
+	    }
+
+	    private int parent(int i) {
+	        return (i - 1) / 2;
+	    }
+
+	    private int left(int i) {
+	        return 2 * i + 1;
+	    }
+
+	    private int right(int i) {
+	        return 2 * i + 2;
+	    }
+
+	    private void swap(int i, int j) {
+	        int temp = heapArray[i];
+	        heapArray[i] = heapArray[j];
+	        heapArray[j] = temp;
+</font>	    }
+
+	    public void insert(int value) {
+	        if (size == capacity) {
+	            System.out.println("Heap is full");
+	            return;
+	        }
+	        heapArray[size] = value;
+	        int current = size;
+	        size++;
+	        while (current &gt; 0 &amp;&amp; heapArray[current] &lt; heapArray[parent(current)]) {
+	            swap(current, parent(current));
+	            current = parent(current);
+	        }
+	    }
+
+	    public int extractMin() {
+	        if (size &lt;= 0) {
+	            System.out.println("Heap is empty.");
+	            return -1; // Or throw an exception
+	        }
+	        if (size == 1) {
+	            size--;
+	            return heapArray[0];
+	        }
+<a name="6"></a><font color="#00FF00"><a href="match139-0.html#6" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+	        int root = heapArray[0];
+	        heapArray[0] = heapArray[size - 1];
+	        size--;
+	        minHeapify(0);
+	        return root;
+	    }
+
+	    private void minHeapify(int i) {
+</font><a name="3"></a><font color="#00FFFF"><a href="match139-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_5.gif"/></a>
+
+	        int l = left(i);
+	        int r = right(i);
+	        int smallest = i;
+
+	        if (l &lt; size &amp;&amp; heapArray[l] &lt; heapArray[smallest]) {
+	            smallest = l;
+	        }
+	        if (r &lt; size &amp;&amp; heapArray[r] &lt; heapArray[smallest]) {
+	            smallest = r;
+</font>	        }
+	        if (smallest != i) {
+	            swap(i, smallest);
+	            minHeapify(smallest);
+	        }
+	    }
+	public class Main {
+
+<a name="5"></a><font color="#FF0000"><a href="match139-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_3.gif"/></a>
+
+	    public static int[] distributeTasks(int[] tasks, int m) {
+	        MinHeap machineLoads = new MinHeap(m);
+	        for (int i = 0; i &lt; m; i++) {
+	            machineLoads.insert(0);
+</font>	        }
+
+	        for (int task : tasks) {
+	            int minLoad = machineLoads.extractMin();
+<a name="4"></a><font color="#FF00FF"><a href="match139-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_4.gif"/></a>
+
+	            minLoad += task;
+	            machineLoads.insert(minLoad);
+	        }
+
+	        int[] result = new int[m];
+	        for (int i = 0; i &lt; m; i++) {
+	            result[i] = machineLoads.extractMin();
+	        }
+	        return result;
+	    }
+public static void main(String[] args) {
+</font>	        System.out.println("--- Task 3:---");
+	        int[] tasks = {2, 4, 7, 1, 6};
+	        int m = 4;
+	        System.out.println("Input tasks: " + Arrays.toString(tasks));
+	        System.out.println("m" + m);
+	        int[] result3 = distributeTasks(tasks, m);
+	        System.out.println("Output: " + Arrays.toString(result3));
+	        System.out.println("--------------------------------\n");
+	}
+    }
+
+
+//Task-04//
+import java.util.Arrays;
+
+	    public int[] getHeapArray() {
+	        return Arrays.copyOf(this.heapArray, this.size);
+	    }
+
+	    public int getSize() {
+<a name="1"></a><font color="#00FF00"><a href="match139-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_6.gif"/></a>
+
+	        return this.size;
+	    }
+
+	    private int parent(int i) {
+	        return (i - 1) / 2;
+	    }
+
+	    private int left(int i) {
+	        return 2 * i + 1;
+	    }
+
+	    private int right(int i) {
+	        return 2 * i + 2;
+	    }
+
+	    private void swap(int i, int j) {
+	        int temp = heapArray[i];
+	        heapArray[i] = heapArray[j];
+	        heapArray[j] = temp;
+</font>	    }
+
+	    public void insert(int value) {
+	        if (size == capacity) {
+	            System.out.println("Heap is full. Cannot insert.");
+	            return;
+	        }
+	        heapArray[size] = value;
+	        int current = size;
+	        size++;
+	        while (current &gt; 0 &amp;&amp; heapArray[current] &gt; heapArray[parent(current)]) {
+	            swap(current, parent(current));
+	            current = parent(current);
+	        }
+	    }
+
+	    public int extractMax() {
+	        if (size &lt;= 0) {
+	            System.out.println("Heap is empty.");
+	            return -1; // Or throw an exception
+	        }
+	        if (size == 1) {
+	            size--;
+	            return heapArray[0];
+	        }
+	        int root = heapArray[0];
+	        heapArray[0] = heapArray[size - 1];
+	        size--;
+	        maxHeapify(0);
+	        return root;
+	    }
+
+	    private void maxHeapify(int i) {
+<a name="2"></a><font color="#0000FF"><a href="match139-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_5.gif"/></a>
+
+	        int l = left(i);
+	        int r = right(i);
+	        int largest = i;
+
+	        if (l &lt; size &amp;&amp; heapArray[l] &gt; heapArray[largest]) {
+	            largest = l;
+	        }
+	        if (r &lt; size &amp;&amp; heapArray[r] &gt; heapArray[largest]) {
+	            largest = r;
+</font>	        }
+	        if (largest != i) {
+	            swap(i, largest);
+	            maxHeapify(largest);
+	        }
+	    }
+	}
+
+	public class Main {
+	  
+	    public static int[] findTopK(int[] nums, int k) {
+	        MaxHeap maxHeap = new MaxHeap(nums.length);
+	        for (int num : nums) {
+	            maxHeap.insert(num);
+	        }
+
+	        int[] topK = new int[k];
+	        for (int i = 0; i &lt; k; i++) {
+	            if (maxHeap.getSize() &gt; 0) {
+	                topK[i] = maxHeap.extractMax();
+	            } else {
+	                break;
+	            }
+	        }
+	        return topK;
+	    }
+
+	    public static void main(String[] args) {
+	      
+	        System.out.println("--- Task 4:---");
+	        int[] nums = {4, 10, 2, 8, 6, 7};
+	        int k = 3;
+	        System.out.println("Input nums: " + Arrays.toString(nums));
+	        System.out.println("k" + k);
+	        int[] result4 = findTopK(nums, k);
+	        System.out.println("Output: " + Arrays.toString(result4));
+	        System.out.println("--------------------------------\n");
+	    }
+	}
+
+
+</pre>
+</body>
+</html>

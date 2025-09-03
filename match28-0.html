@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>A8_Sec23_24101216_FATIMAH-MIAZI.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec23_24101216_FATIMAH-MIAZI.txt<p></p><pre>
+//Task 03
+
+<a name="0"></a><font color="#FF0000"><a href="match28-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_32.gif"/></a>
+
+public class Task3{ 
+  private static int min_find(int [] array){ 
+    int min= 0; 
+    for(int p=1; p&lt;array.length; p++){ 
+      if(array[p] &lt; array[min]){ 
+        min=p; 
+      } 
+    } 
+    return min; 
+  } 
+    
+  private static void min_swim(int[]x, int indx){ 
+    int parent_node = indx-1/2; 
+    while(indx &gt; 0 &amp;&amp; x[indx] &lt; x[parent_node]){ 
+      swap(x,indx,parent_node); 
+      indx = parent_node; 
+      parent_node = indx-1/2; 
+    } 
+  } 
+   
+  private static void swap(int[] x, int p, int q){ 
+    int tempor = x[p]; 
+    x[p] = x[q]; 
+    x[q] = tempor; 
+  } 
+ 
+   
+  public static int[] method_1(int[] tasks, int m){  
+    int[] hp = new int[m]; 
+    for(int q=0; q&lt;m; q++){ 
+      hp[q]=0; 
+    } 
+    
+    for(int z=0; z&lt;tasks.length; z++){ 
+      int tempor = tasks[z]; 
+      int min_indx = min_find(hp); 
+      hp[min_indx] += tempor; 
+      min_swim(hp, min_indx); 
+    } 
+    return hp; 
+  } 
+} 
+ 
+ 
+ 
+public class Task3_Tester{ 
+  public static void main(String[]args){ 
+</font>    int [] tasks = {2,4,7,1,6}; 
+    int m = 4; 
+    int[] ar = Task3.method1(tasks,m); 
+    for(int i=0;i &lt;ar.length;i++){ 
+      System.out.print(ar[i]+" "); 
+    } 
+  } 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+//Task 04
+<a name="1"></a><font color="#00FF00"><a href="match28-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_26.gif"/></a>
+
+ 
+ 
+ 
+public class Task4{ 
+  private static void swap(int[] x, int p, int q){ 
+    int tempor = x[p]; 
+    x[p] = x[q]; 
+    x[q] = tempor; 
+  } 
+ 
+  private static void max_swim(int[]y, int indx){ 
+    int parent_node = (indx-1)/2; 
+    while(indx &gt; 0 &amp;&amp; y[indx] &gt; y[parent_node]){ 
+      swap(y, indx, parent_node); 
+      indx = parent_node; 
+      parent_node = (indx-1)/2; 
+    } 
+  } 
+   
+  private static int max_find(int[]z, int var){ 
+    if(var==0){ 
+      return -1; 
+    } 
+    int max = z[0]; 
+    z[0] = z[var-1];  
+    z[var-1] = 0; 
+    max_heap(z, var-1, 0); 
+    return max; 
+  } 
+    
+  private static void max_heap(int[]ar, int num, int indx){ 
+        int max = indx; 
+        int left = 2*indx+1; 
+        int right = 2*indx+2; 
+</font>        if(left&lt;num &amp;&amp; ar[left] &gt; ar[max]){ 
+            max=left; 
+        } 
+<a name="2"></a><font color="#0000FF"><a href="match28-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_17.gif"/></a>
+
+        if(right&lt;num &amp;&amp; ar[right] &gt; ar[max]){ 
+            max=right; 
+        } 
+        if(max != indx){ 
+            swap(ar,indx,max); 
+            max_heap(ar,num,max); 
+        } 
+    } 
+ 
+  public static int[] find(int[]ar, int r){ 
+    int a = ar.length; 
+    int[] hp = new int[a]; 
+    for(int i=0; i&lt;a; i++){ 
+      hp[i] = ar[i]; 
+      max_swim(hp,i);  
+    } 
+    int[] result =new int[r]; 
+      for(int i=0; i&lt;r; i++){ 
+        result[i]= max_find(hp, a-i); 
+      } 
+      return result; 
+</font>   } 
+ }  
+ 
+ 
+  
+   
+ 
+ 
+public class Task4_Tester{ 
+  public static void main(String[] args){ 
+    int[] nums ={4, 10, 2, 8, 6, 7}; 
+    int k = 3; 
+    int[] array_hp = Task4.find(nums, k); 
+    for(int i=0; i&lt;array_hp.length; i++){ 
+      System.out.print(array_hp[i] +" "); 
+    } 
+  } 
+}</pre>
+</body>
+</html>

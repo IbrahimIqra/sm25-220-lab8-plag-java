@@ -1,0 +1,260 @@
+<html>
+<head>
+<title>A8_Sec04_23301557_Zarab-Juhayer---ZARAB-JUHAYER.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec04_23301557_Zarab-Juhayer---ZARAB-JUHAYER.txt<p></p><pre>
+﻿Assignment Task 3:
+
+public class Task3 {
+
+
+   static class myMinHeap{
+      private int arr[];
+      private int s;
+      public myMinHeap(int cap){
+         arr=new int[cap];
+         s=cap;
+      }
+      private void down(int i){
+
+
+         int sm=i;
+         int l =2*i+1;
+         int r=2*i+2;
+<a name="2"></a><font color="#0000FF"><a href="match117-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_3.gif"/></a>
+
+         if(l&lt;s &amp;&amp; arr[l] &lt; arr[sm]){
+            sm=l;
+         }
+         if(r&lt;s &amp;&amp; arr[r] &lt; arr[sm]){
+            sm=r;
+         }
+         if(sm!=i){
+</font>            int t =arr[i];
+            arr[i] = arr[sm];
+            arr[sm]=t;
+            down(sm);
+         }
+      }
+      private void up(int i){
+         while(i&gt;0 &amp;&amp; arr[i] &lt; arr[(i-1)/2]){
+            int t=arr[i];
+            arr[i]=arr[(i-1)/2];
+            arr[(i-1)/2]=t;
+            i = (i-1)/2;
+         }
+      }
+      public int takeMin(){
+<a name="5"></a><font color="#FF0000"><a href="match117-1.html#5" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_2.gif"/></a>
+
+         if(s==0){
+            return -1;
+         }
+         int r =arr[0];
+         arr[0] = arr[s-1];
+         s=s-1;
+</font>         down(0);
+         return r;
+      }
+      public void put(int v){
+         if(s == arr.length){
+            return;
+         }
+         arr[s]=v;
+         int i=s;
+         s=s+1;
+         up(i);
+      }
+      public int[] getArr(){
+         int[] r=new int[s];
+         for(int i=0;i&lt;s;i=i+1){
+            r[i]=arr[i];
+         }
+         return r;
+
+
+      }
+   }
+
+
+  
+   public static int[] assign(int[] t, int m){
+      myMinHeap h =new myMinHeap(m);
+      for(int i=0;i&lt;m;i=i+1){
+         h.arr[i]=0;
+      }
+      for(int i=0;i&lt;t.length; i=i+1){
+
+
+         int mn =h.takeMin();
+         mn =mn+t[i];
+         h.put(mn);
+      }
+
+
+
+
+      return h.getArr();
+   }
+   //tester
+<a name="9"></a><font color="#FF00FF"><a href="match117-1.html#9" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_2.gif"/></a>
+
+   public static void main(String[] a){
+      int[] tasks = {2,4,7,1,6};
+      int mm =4;
+</font>
+
+      int[] r = assign(tasks, mm);
+      for(int i=0; i&lt;r.length-1;i=i+1){
+         int min=i;
+         for(int j=i+1; j&lt;r.length;j=j+1){
+            if(r[j] &lt; r[min]){
+               min=j;
+            }
+         }
+         int tmp =r[i];
+         r[i]=r[min];
+         r[min]= tmp;
+        
+
+
+      }
+      System.out.print("[");
+      for(int i=0; i&lt;r.length;i=i+1){
+<a name="4"></a><font color="#FF00FF"><a href="match117-1.html#4" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_3.gif"/></a>
+
+         System.out.print(r[i]);
+         if(i&lt;r.length-1){
+            System.out.print(", ");
+         }
+      }
+      System.out.println("]");
+   }
+}
+
+
+
+Assignment Task 4:
+</font>
+
+public class Task4 {
+
+
+   static class myMaxHeap{
+      private int arr[];
+      private int s;
+      public myMaxHeap(int cap){
+         arr=new int[cap];
+         s=0;
+      }
+      private void down(int i){
+         int big= i;
+         int l=2*i+1;
+         int r=2*i+2;
+
+
+<a name="1"></a><font color="#00FF00"><a href="match117-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_3.gif"/></a>
+
+         if(l&lt;s &amp;&amp; arr[l] &gt; arr[big]){
+            big =l;
+         }
+
+
+
+
+         if(r&lt;s &amp;&amp; arr[r] &gt; arr[big]){
+            big=r;
+
+
+         }
+         if(big != i){
+</font>            int t=arr[i];
+            arr[i]=arr[big];
+            arr[big]=t;
+            down(big);
+         }
+
+
+
+
+      }
+      private void up(int i){
+         while(i&gt;0 &amp;&amp; arr[i] &gt; arr[(i-1)/2]){
+            int t=arr[i];
+            arr[i]=arr[(i-1)/2];
+            arr[(i-1)/2]= t;
+            i =(i-1)/2;
+         }
+
+
+
+
+      }
+      public void put(int v){
+         if( s==arr.length){
+            return;
+         }
+         arr[s]=v;
+         int i=s;
+         s=s+1;
+         up(i);
+
+
+
+
+      }
+      public int takeMax(){
+<a name="6"></a><font color="#00FF00"><a href="match117-1.html#6" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_2.gif"/></a>
+
+         if(s == 0){
+            return -1;
+         }
+         int r=arr[0];
+         arr[0]= arr[s-1];
+         s =s-1;
+</font>         down(0);
+<a name="3"></a><font color="#00FFFF"><a href="match117-1.html#3" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_3.gif"/></a>
+
+         return r;
+
+
+       }
+   }
+   public static int[] topK(int[] nums, int k){
+      myMaxHeap h = new myMaxHeap(nums.length);
+      for(int i=0;i&lt;nums.length;i=i+1){
+</font><a name="7"></a><font color="#0000FF"><a href="match117-1.html#7" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_2.gif"/></a>
+
+         h.put(nums[i]);
+      }
+
+
+      int[] res= new int[k];
+      for(int i=0;i&lt;k;i=i+1){
+</font><a name="0"></a><font color="#FF0000"><a href="match117-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_6.gif"/></a>
+
+         res[i] = h.takeMax();
+      }
+      return res;
+   }
+   //tester
+   public static void main(String[] a){
+      int[] nums={4,10,2,8,6,7};
+      int k=3;
+      int[] r=topK(nums, k);
+      System.out.print("[");
+      for(int i=0;i&lt;r.length; i=i+1){
+</font><a name="8"></a><font color="#00FFFF"><a href="match117-1.html#8" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_2.gif"/></a>
+
+         System.out.print(r[i]);
+         if(i&lt;r.length-1){
+            System.out.print(", ");
+         }
+      }
+      System.out.println("]");
+</font>   }
+}</pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>A8_Sec08_24301042_Tanzim-Rahman---TANZIM-RAHMAN.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec17_24101487_PRIYOTA-BANIK.txt<p></p><pre>
+public class task3 {
+
+<a name="0"></a><font color="#FF0000"><a href="match97-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_28.gif"/></a>
+
+    public static int [] processingTime(int [] tasks, int m){
+        MinHeap mHeap=new MinHeap(m);
+        for(int i=0;i&lt;m;i++){
+            mHeap.insert(0);
+        }
+        for(int i=0;i&lt;tasks.length;i++){
+            int current=mHeap.extractMin();
+            int sum=current+tasks[i];
+            mHeap.insert(sum);
+        }
+        int [] finalArr=new int[m];
+        for(int i=0;i&lt;m;i++){
+            finalArr[i]=mHeap.extractMin();
+        }
+        return finalArr;
+    }
+
+    //Driver code
+    public static void main(String[] args) {
+</font><a name="5"></a><font color="#FF0000"><a href="match97-0.html#5" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_9.gif"/></a>
+
+        int [] tasks={2,4,7,1,6};
+        int m=4;
+        int [] mLoads=processingTime(tasks, m);
+</font><a name="2"></a><font color="#0000FF"><a href="match97-0.html#2" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_12.gif"/></a>
+
+         System.out.print("[");
+        for(int j=0;j&lt;mLoads.length;j++){
+            System.out.print(mLoads[j]);
+            if(j&lt;mLoads.length-1){
+                System.out.print(",");
+            }
+        }
+</font><a name="1"></a><font color="#00FF00"><a href="match97-0.html#1" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_22.gif"/></a>
+
+        System.out.print("]");
+    }
+}
+
+public class task4 {
+    
+    public static int [] largestElems(int [] nums, int k){
+        MaxHeap mHeap=new MaxHeap(nums.length);
+        for(int i=0;i&lt;nums.length;i++){
+            mHeap.insert(nums[i]);
+        }
+        int [] resultArr=new int[k];
+        for(int i=0;i&lt;k;i++){
+            resultArr[i]=mHeap.extractMax();
+        }
+        return resultArr;
+    }
+
+    //Driver code
+    public static void main(String[] args) {
+</font><a name="4"></a><font color="#FF00FF"><a href="match97-0.html#4" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_4_10.gif"/></a>
+
+        int [] nums={4,10,2,8,6,7};
+        int k=3;
+        int [] largest=largestElems(nums, k);
+</font><a name="3"></a><font color="#00FFFF"><a href="match97-0.html#3" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_3_12.gif"/></a>
+
+        System.out.print("[");
+        for(int j=0;j&lt;largest.length;j++){
+            System.out.print(largest[j]);
+            if(j&lt;largest.length-1){
+                System.out.print(",");
+            }
+        }
+        System.out.print("]");
+</font>    }
+}</pre>
+</body>
+</html>

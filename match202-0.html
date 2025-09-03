@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>A8_Sec12_20101605_Sania-Afroj-Sony.txt</title>
+</head>
+<body bgcolor="white">
+<hr/>
+A8_Sec12_20101605_Sania-Afroj-Sony.txt<p></p><pre>
+//////////////////task03////////////////////////
+
+public class Assignment8_task3
+{
+
+<a name="2"></a><font color="#0000FF"><a href="match202-1.html#2" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_2_13.gif"/></a>
+
+	public static int[] distribute(int[]tasks, int m)
+	{
+
+		MinHeap heap = new MinHeap(m);
+		
+		for (int i=0; i&lt;m; i++)
+		{
+			heap.insert(0);
+		}
+
+
+		for (int i=0; i&lt;tasks.length; i++) 
+</font>		{
+			int min_load = heap.extractMin();
+			int new_load = min_load + tasks[i];
+<a name="1"></a><font color="#00FF00"><a href="match202-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_27.gif"/></a>
+
+			heap.insert(new_load);
+		}
+		return heap.getHeap();
+	}
+
+	public static void main(String[] args) 
+	{
+		int[] tasks = {2, 4, 7, 1, 6};
+		int m = 4;
+		int[] res = distribute(tasks, m);
+
+		System.out.print("Final machine loads: [");
+		for (int i = 0; i &lt; res.length; i++) 
+		{
+			System.out.print(res[i]);
+			
+			if (i&lt;res.length-1) 
+			{
+			  System.out.print(", ");
+			}
+		}
+</font><a name="0"></a><font color="#FF0000"><a href="match202-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_49.gif"/></a>
+
+		System.out.println("]");
+	}
+}
+
+
+
+
+//////////////////task04////////////////////////
+
+
+public class Assignment8_task4 
+{
+	public static int[] top_k(int[]nums, int k) 
+	{
+		MaxHeap maxHeap = new MaxHeap(nums.length);
+
+    for (int i=0; i&lt;nums.length; i++) 
+    {
+        maxHeap.insert(nums[i]);
+    }
+
+
+		int[] res = new int[k];
+
+
+		for (int i=0; i&lt;k; i++) 
+		{
+			res[i] = maxHeap.extractMax();
+		}
+		return res;
+	}
+
+	public static void main(String[] args) 
+	{
+		int[] nums = {4, 10, 2, 8, 6, 7};
+		int k = 3;
+		int[] res = top_k(nums, k);
+
+		System.out.print("[");
+		for (int i=0; i&lt;res.length; i++)
+		{
+			System.out.print(res[i]);
+			
+			if (i&lt;res.length - 1) 
+			{
+			  System.out.print(", ");
+			}
+		}
+		System.out.println("]");
+</font>	}
+}
+
+
+
+/////////////////end/////////////////////
+
+</pre>
+</body>
+</html>
